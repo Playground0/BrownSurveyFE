@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 
 
-export class AppComponent {
+export class AppComponent implements OnInit {
   //First changes to dev branch
   
   title = 'Brownsurvey';
@@ -16,9 +16,8 @@ export class AppComponent {
   {
 
   }
-  ngOnInit()
-  {
-    this.title = "Test"
+  ngOnInit(): void {
+    
   }
   
 }
