@@ -20,6 +20,7 @@
     "@angular/router": "^15.1.0",
     "bootstrap": "^5.2.3",
     "jquery": "^3.6.3",
+    "lodash": "^4.17.21",
     "popper.js": "^1.16.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
