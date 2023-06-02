@@ -2,12 +2,19 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { PrivateRoutingModule } from './private-routing.module';
-import { PrivateComponent } from './private.component';
+
+import { ProfilePageComponent } from './components/profile-page/profile-page.component'; 
+import { DashboardComponent } from './components/dashboard/dashboard.component'; 
+import { ProfileDetailsComponent } from './components/profile-details/profile-details.component';
+import { DraftedFormsComponent } from './components/drafted-forms/drafted-forms.component'; 
 
 
 @NgModule({
   declarations: [
-    PrivateComponent
+    ProfilePageComponent,
+    DashboardComponent,
+    ProfileDetailsComponent,
+    DraftedFormsComponent
   ],
   imports: [
     CommonModule,
