@@ -1,11 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 @font-face {
     font-family: 'Bree Serif';
-    src: url('../../BrownSurvey-master/src/assets/BreeSerif-Regular.ttf');
+    src: url('../src/assets/BreeSerif-Regular.ttf');
   }
   @font-face {
     font-family: 'Sansation';
-    src: url('../../BrownSurvey-master/src/assets/Sansation_Regular.ttf');
+    src: url('../src/assets/Sansation_Regular.ttf');
   }  
 
 html, body { height: 100%; background-color: #DEDEDE;}
