@@ -1,39 +1,35 @@
-.header{
-    margin-top: 2%;
-    margin-bottom: 2%;
+.header {
+  margin-top: 2%;
+  margin-bottom: 2%;
 }
-.title{
-    display: flex;
-    font-weight: 700;
-    font-size: 70px;
-    font-family: 'Sansation';
-    color: #C10000;
+.title {
+  display: flex;
+  font-weight: 700;
+  font-size: 70px;
+  font-family: "Sansation";
+  color: #c10000;
 }
-.title span{
-    font-size: 40px;
-    margin-top: 4%;
-    margin-left: 2%;
+.title span {
+  font-size: 40px;
+  margin-top: 4%;
+  margin-left: 2%;
 }
-.btn{
-    color: #595260;
-    font-weight: 400;
-    font-size: 24px;
-    box-shadow: none !important;
-    padding: 0;
-    border: none;
-    background: none;
+.title svg{
+    fill: #c10000;
 }
-.btn:hover, .btn:focus{
-    color: #C10000;
+.btn {
+  color: #595260;
+  font-weight: 400;
+  font-size: 24px;
+  box-shadow: none !important;
+  padding: 0;
+  border: none;
+  background: none;
 }
-/* .btn:focus{
-    color: #C10000;
-    border: none;
-    box-shadow: none !important;
+.btn:hover,
+.btn:focus {
+  color: #c10000;
 }
-.btn:active{
-    color: #C10000;
-} */
-.line{
-        border: 1px solid #ffffff;
+.line {
+  border: 1px solid #ffffff;
 }
