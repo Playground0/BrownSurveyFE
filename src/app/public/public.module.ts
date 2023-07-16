@@ -10,7 +10,8 @@ import { ViewFormComponent } from './components/view-form/view-form.component';
 import { LoginComponent } from './components/login/login.component'; 
 import { AboutUsComponent } from './components/about-us/about-us.component'; 
 import { SubscribePlanComponent } from './components/subscribe-plan/subscribe-plan.component';
-
+import { FormListComponent } from './components/form-list/form-list.component';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -22,10 +23,12 @@ import { SubscribePlanComponent } from './components/subscribe-plan/subscribe-pl
     SubscribePlanComponent,
     FormOverviewComponent,
     FormConfirmationComponent,
+    FormListComponent,
   ],
   imports: [
     CommonModule,
-    PublicRoutingModule
+    PublicRoutingModule,
+    MatIconModule
   ]
 })
 export class PublicModule { }

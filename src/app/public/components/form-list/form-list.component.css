@@ -1,0 +1,28 @@
+.content {
+  background-color: #eeeeee;
+  height: 60vh;
+  border-radius: 20px;
+  color: #595260;
+  position: relative;
+}
+.list-of-form {
+  height: 45vh;
+  overflow-y: scroll;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+.list-of-form::-webkit-scrollbar {
+  display: none;
+}
+.list-group-item{
+    border-radius: 0;
+}
+.load-more{
+    color: #C10000;
+    display: flex;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    padding-top: 2%;
+    padding-bottom: 2%;
+}
