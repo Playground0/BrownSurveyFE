@@ -1,0 +1,13 @@
+<div class="container">
+    <div class="content">
+        <ng-content select=".header"></ng-content>
+        <div class="list-of-form">
+            <!-- <span *ngFor="let form of list">{{form.name}}</span> -->
+            <div class="list-group">
+                <button class="list-group-item list-group-item-action" *ngFor="let form of list">{{form.name}}</button>
+                <button *ngIf="list && list.length >= 10" class="load-more">Load More...</button>
+            </div>
+        </div>
+            <ng-content select=".btn"></ng-content>    
+    </div>
+</div>
