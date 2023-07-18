@@ -1,2 +1,60 @@
-<p>create-form works!</p>
-<router-outlet></router-outlet>
+<div class="container">
+  <div class="rounded-box form-type mt-1 row">
+    <div class="col-md-2">
+      <mat-form-field class="form-category" appearance="outline">
+        <!-- <mat-label>Choose one</mat-label> -->
+        <mat-select placeholder="Category">
+          <mat-option>Clear</mat-option>
+          <mat-option value="valid">Valid option</mat-option>
+          <mat-option value="invalid">Invalid option</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="col-md-8">
+      <mat-form-field class="form-name" appearance="outline">
+        <input type="email" matInput placeholder="{{ formType }} Name" />
+      </mat-form-field>
+    </div>
+    <div class="col-md-2">
+      <div class="form-authenticity">Authenticity</div>
+    </div>
+  </div>
+
+  <div *ngFor="let form of forms">
+    <div class="rounded-box forms">
+      <div class="form-area">
+        <div class="row">
+            <div class="col-md-10">
+                <mat-form-field appearance="outline">
+                    <input type="email" matInput placeholder="Question" />
+                  </mat-form-field>
+            </div>
+            <div class="col-md-2">
+                <mat-form-field appearance="outline">
+                    <!-- <mat-label>Choose one</mat-label> -->
+                    <mat-select placeholder="Type">
+                      <mat-option>Clear</mat-option>
+                      <mat-option value="valid">Valid option</mat-option>
+                      <mat-option value="invalid">Invalid option</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+            </div>
+        </div>
+        <div class="row form-options">
+        </div>
+      </div>
+      <div class="delete-btn">
+        <button class="btn" title="Delete"><mat-icon>delete</mat-icon></button>
+      </div>
+    </div>
+  </div>
+  <div class="buttons">
+    <div>
+      <button class="btn">Add Form</button>
+    </div>
+    <div>
+      <button class="btn">Review Form</button>
+    </div>
+  </div>
+  <router-outlet></router-outlet>
+</div>
