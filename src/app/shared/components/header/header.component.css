@@ -8,14 +8,32 @@
   font-size: 70px;
   font-family: "Sansation";
   color: #c10000;
+  cursor: pointer;
 }
 .title span {
   font-size: 40px;
-  margin-top: 4%;
+  margin-top: 8%;
   margin-left: 2%;
 }
 .title svg{
     fill: #c10000;
+}
+
+.title:hover {
+  color: grey;
+  transition: all 0.3s ease;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+}
+.title:hover svg{
+  fill: grey;
+  transition: all 0.3s ease;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
 }
 .btn {
   color: #595260;

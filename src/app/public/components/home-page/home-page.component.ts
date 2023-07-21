@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home-page',
@@ -7,13 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomePageComponent implements OnInit{
 
+  
   listOfSurvey: any[] = [];
   listOfQuizzes: any[] = [];
   listOfOpinions: any[] = []; 
+  constructor(private router:Router){}
   ngOnInit(): void {
     this.getListOfSurveys();
     this.getListOfQuizzes();
     this.getListOfOpinions()
+  }
+  createForm(formType: string){
+    this.router.navigateByUrl(`/create/${formType}`);
   }
 
   getListOfSurveys(){

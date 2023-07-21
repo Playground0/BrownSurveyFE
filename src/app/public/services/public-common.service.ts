@@ -6,4 +6,25 @@ import { Injectable } from '@angular/core';
 export class PublicCommonService {
 
   constructor() { }
+
+  getFormKey(urlKey:string) : string {
+    // let urlKey = url.split('/').length > 2 ? url.split('/')[2] : '';
+    switch(urlKey){
+      case 'survey': {return 'Survey'}
+      case 'quiz': {return 'Quiz'}
+      case 'opinion': {return 'Opinion';}
+      default : break;
+    }
+    return '';
+  }
+  getFormLimit(formType:string) : number {
+    let limit = 0;
+    switch(formType){
+      case 'survey': {return 10}
+      case 'quiz': {return 10}
+      case 'opinion': {return 1}
+      default : break;
+    }
+    return limit;
+  }
 }

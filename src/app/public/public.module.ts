@@ -12,6 +12,11 @@ import { AboutUsComponent } from './components/about-us/about-us.component';
 import { SubscribePlanComponent } from './components/subscribe-plan/subscribe-plan.component';
 import { FormListComponent } from './components/form-list/form-list.component';
 import {MatIconModule} from '@angular/material/icon';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatSelectModule} from '@angular/material/select';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -28,7 +33,13 @@ import {MatIconModule} from '@angular/material/icon';
   imports: [
     CommonModule,
     PublicRoutingModule,
-    MatIconModule
+    MatIconModule,
+    MatMenuModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    ReactiveFormsModule,
+    FormsModule
   ]
 })
 export class PublicModule { }
