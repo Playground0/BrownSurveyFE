@@ -1,9 +1,10 @@
 <div class="container">
+  <form [formGroup]="customForm">
   <div class="rounded-box form-type mt-1 row">
     <div class="col-md-2">
-      <mat-form-field class="form-category" appearance="outline">
+      <mat-form-field class="form-category" appearance="outline" >
         <!-- <mat-label>Choose one</mat-label> -->
-        <mat-select placeholder="Category">
+        <mat-select placeholder="Category" formControlName="category"> 
           <mat-option>Clear</mat-option>
           <mat-option value="valid">Valid option</mat-option>
           <mat-option value="invalid">Invalid option</mat-option>
@@ -12,7 +13,7 @@
     </div>
     <div class="col-md-8">
       <mat-form-field class="form-name" appearance="outline">
-        <input type="email" matInput placeholder="{{ formType }} Name" />
+        <input formControlName="title" type="email" matInput placeholder="{{ formType }} Title" />
       </mat-form-field>
     </div>
     <div class="col-md-2">
@@ -20,41 +21,45 @@
     </div>
   </div>
 
-  <div *ngFor="let form of forms">
-    <div class="rounded-box forms">
-      <div class="form-area">
-        <div class="row">
-            <div class="col-md-10">
-                <mat-form-field appearance="outline">
-                    <input type="email" matInput placeholder="Question" />
-                  </mat-form-field>
-            </div>
-            <div class="col-md-2">
-                <mat-form-field appearance="outline">
-                    <!-- <mat-label>Choose one</mat-label> -->
-                    <mat-select placeholder="Type">
-                      <mat-option>Clear</mat-option>
-                      <mat-option value="valid">Valid option</mat-option>
-                      <mat-option value="invalid">Invalid option</mat-option>
-                    </mat-select>
-                  </mat-form-field>
-            </div>
+  <ng-container formArrayName="forms">
+    <div *ngFor="let form of forms.controls; let i = index">
+      <div class="rounded-box forms" [formGroupName]="i">
+        <div class="form-area">
+          <div class="row">
+              <div class="col-md-10">
+                  <mat-form-field appearance="outline">
+                      <input type="email" formControlName="question" matInput placeholder="Question" />
+                    </mat-form-field>
+              </div>
+              <div class="col-md-2">
+                  <mat-form-field appearance="outline">
+                      <!-- <mat-label>Choose one</mat-label> -->
+                      <mat-select placeholder="Type" formControlName="type">
+                        <mat-option>Clear</mat-option>
+                        <mat-option value="valid">Valid option</mat-option>
+                        <mat-option value="invalid">Invalid option</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+              </div>
+          </div>
+          <div class="row form-options">
+          </div>
         </div>
-        <div class="row form-options">
+        <div class="delete-btn">
+          <button class="btn" title="Delete" (click)="deleteForm(i)"><mat-icon>delete</mat-icon></button>
         </div>
-      </div>
-      <div class="delete-btn">
-        <button class="btn" title="Delete"><mat-icon>delete</mat-icon></button>
       </div>
     </div>
-  </div>
+  </ng-container>
   <div class="buttons">
     <div>
-      <button class="btn">Add Form</button>
+      <button class="btn" [disabled]="forms.controls.length === formLimit" (click)="addForm()">Add Form</button>
     </div>
     <div>
-      <button class="btn">Review Form</button>
+      <button class="btn" (click)="reviewForm()">Review Form</button>
     </div>
   </div>
+</form>
+  
   <router-outlet></router-outlet>
 </div>

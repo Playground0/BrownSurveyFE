@@ -11,4 +11,16 @@
 html, body { height: 100%; background-color: #DEDEDE;}
 body { margin: 0; font-family: 'Bree Serif', serif; }
 
-  
+.mat-mdc-text-field-wrapper {
+  width: 100%;
+  background-color: #D9D9D9;
+}
+.mat-mdc-select-arrow{
+  color: #c10000;
+}
+.mat-mdc-select-placeholder{
+  font-weight: 600;
+}
+.mdc-text-field--no-label:not(.mdc-text-field--textarea){
+  font-weight: 600;
+}

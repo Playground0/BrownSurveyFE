@@ -21,6 +21,7 @@
 
 .title:hover {
   color: grey;
+  transition: all 0.3s ease;
   -webkit-transition: all 0.3s ease;
   -moz-transition: all 0.3s ease;
   -o-transition: all 0.3s ease;
@@ -28,6 +29,7 @@
 }
 .title:hover svg{
   fill: grey;
+  transition: all 0.3s ease;
   -webkit-transition: all 0.3s ease;
   -moz-transition: all 0.3s ease;
   -o-transition: all 0.3s ease;
