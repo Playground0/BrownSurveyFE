@@ -1,0 +1,11 @@
+.rounded-box{
+    margin-top: 5%;
+    margin-bottom: 3%;
+    border: 1px solid #EEEEEE;
+    border-radius: 20px;
+    height: 30vh;
+    position: relative;
+}
+.mat-mdc-form-field{
+    display: flex;
+}

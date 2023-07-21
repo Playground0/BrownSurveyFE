@@ -1,4 +1,5 @@
 <div class="container">
+
   <!-- start list of form -->
   <div class="list-of-forms">
     <div class="row">
@@ -7,7 +8,7 @@
           <div class="header">
             <span>Top Surveys</span>
           </div>
-          <button class="btn">Create Survey</button>
+          <button class="btn" (click)="createForm('survey')">Create Survey</button>
         </app-form-list>
       </div>
       <div class="col">
@@ -15,7 +16,7 @@
           <div class="header">
             <span>Top Quizzes</span>
           </div>
-          <button class="btn">Create Quiz</button>
+          <button class="btn" (click)="createForm('quiz')">Create Quiz</button>
         </app-form-list>
       </div>
       <div class="col">
@@ -23,7 +24,7 @@
           <div class="header">
             <span>Top Opinions</span>
           </div>
-          <button class="btn">Create Opinion</button>
+          <button class="btn" (click)="createForm('opinion')">Create Opinion</button>
         </app-form-list>
       </div>
     </div>

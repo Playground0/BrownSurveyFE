@@ -1,7 +1,7 @@
 <div class="header container">
   <div class="row">
-    <div class="col">
-      <div class="title">
+    <div class="col-md-3">
+      <div class="title" (click)="gotToHome()">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           height="1em"
@@ -14,13 +14,26 @@
         <span>BrownSurvey</span>
       </div>
     </div>
-    <div class="col d-flex justify-content-between">
-            <button class="btn">Home</button>
-            <button class="btn">Create</button>
-            <button class="btn">Subscribe</button>
-            <button class="btn">About Us</button>
-            <button class="btn">Login</button>
+    <div class="col-md-3"></div>
+    <div class="col-md-6 d-flex justify-content-between">
+      <button class="btn" (click)="gotToHome()">Home</button>
+      <button class="btn" [matMenuTriggerFor]="menu">Create</button>
+      <button class="btn" (click)="goToPlans()">Subscribe</button>
+      <button class="btn" (click)="goToAboutUs()">About Us</button>
+      <button class="btn" (click)="goToLogin()">Login</button>
     </div>
   </div>
 </div>
 <hr class="container line" />
+
+<mat-menu #menu="matMenu">
+  <button mat-menu-item (click)="goToCreate('survey')">
+    <span>Survey</span>
+  </button>
+  <button mat-menu-item (click)="goToCreate('quiz')">
+    <span>Quiz</span>
+  </button>
+  <button mat-menu-item (click)="goToCreate('opinion')">
+    <span>Opinion</span>
+  </button>
+</mat-menu>

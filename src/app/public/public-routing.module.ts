@@ -35,7 +35,7 @@ const routes: Routes = [
     component: SubscribePlanComponent,
   },
   {
-    path: 'create',
+    path: 'create/:formType',
     component: CreateFormComponent,
     children: [
       { path: '', redirectTo: '', pathMatch: 'full'},
