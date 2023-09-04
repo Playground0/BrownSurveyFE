@@ -11,7 +11,7 @@ import { AdminConfiguration } from '../models/UIModels/AdminConfiguration';
 })
 export class PublicApiService {
 
-  localHost : boolean = true;
+  localHost : boolean = false;
   apiUrl = this.localHost ? "http://localhost:8080/api" : "https://zany-cyan-puffer-slip.cyclic.app/api";
   constructor(private http: HttpClient) { }
 
