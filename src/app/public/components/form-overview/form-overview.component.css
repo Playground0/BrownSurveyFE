@@ -1,0 +1,35 @@
+@import url(../../../shared/styles/globalstyles.css);
+
+.center-div {
+  display: flex;
+  justify-content: center;
+}
+
+.form-first-input {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 16%;
+  margin-right: 16%;
+  margin-top: 3%;
+}
+
+.check-box-inputs {
+  margin-left: 16%;
+  margin-right: 5%;
+  margin-top: 1%;
+}
+
+.button .btn {
+  background-color: #c10000;
+  color: #eeeeee;
+  width: 150px;
+  padding: 8%;
+  box-shadow: none !important;
+  border: none;
+}
+.form-view {
+  border: 1px solid #eeeeee;
+  pointer-events: none;
+  margin-bottom: 1%;
+}

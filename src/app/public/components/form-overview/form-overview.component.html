@@ -1,1 +1,60 @@
-<p>form-overview works!</p>
+<div class="container">
+   <div *ngIf="submitLoader" class="loader">
+    <div class="spinner">
+        <mat-spinner></mat-spinner>
+    </div>
+   </div> 
+  <div class="top-part">
+    <div class="center-div mt-4">
+      <h2>
+        Take a few seconds and fill the form below so that we can reach you with
+        updates
+      </h2>
+    </div>
+    <form [formGroup]="submitForm">
+      <div class="form-first-input">
+        <div>
+          <mat-form-field appearance="outline">
+            <mat-select formControlName="status" placeholder="Set Status">
+              <mat-option>Clear</mat-option>
+              <mat-option [value]="status.name" *ngFor="let status of statusDropDown$ | async">{{status.name}}</mat-option>
+              <!-- <mat-option>Private</mat-option>
+              <mat-option>Draft</mat-option> -->
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field appearance="outline">
+            <input
+              type="text"
+              matInput
+              placeholder="Email"
+              formControlName="email"
+            />
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="check-box-inputs">
+        <mat-checkbox class="example-margin" formControlName="recieveUpdates">Receive
+            updates and promotional offers from widesurvey</mat-checkbox><br><br>
+        <mat-checkbox class="example-margin" formControlName="targetAudience">Targeted Audience</mat-checkbox>
+      </div>
+      <div class="center-div">
+        <div class="button">
+          <button class="btn" (click)="submitSurvey()">Submit Survey</button>
+        </div>
+      </div>
+    </form>
+
+    <div>
+        <div class="center-div mt-2">
+            <h2><strong>This is how your form will look to other</strong></h2>
+          </div>
+          <span class="center-div mt-0 mb-1">(Read Only Mode)</span>
+          <div class="form-view shadow">
+              <app-view-form [dataFromDialog]="data.formData"></app-view-form>
+          </div>
+    </div>
+    
+  </div>
+</div>

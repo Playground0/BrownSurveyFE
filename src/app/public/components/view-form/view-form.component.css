@@ -51,3 +51,14 @@
     justify-content: center;
     align-items: center;
 }
+.submit-btn-area .btn{
+    background-color: #c10000;
+    color: #eeeeee;
+    width: 150px;
+    padding: 1%;
+    box-shadow: none !important;
+    border: none;
+}
+.submit-responses-details{
+    width: 50%;
+}

@@ -94,7 +94,7 @@
   background-color: #c10000;
   color: #eeeeee;
   width: 150px;
-  height: 50px;
+  padding:8%;
   box-shadow: none !important;
   border: none;
 }

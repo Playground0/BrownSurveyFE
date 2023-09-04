@@ -5,7 +5,6 @@ import { PublicRoutingModule } from './public-routing.module';
 import { HomePageComponent } from './components/home-page/home-page.component'; 
 import { CreateFormComponent } from './components/create-form/create-form.component'; 
 import { FormOverviewComponent } from './components/form-overview/form-overview.component'; 
-import { FormConfirmationComponent } from './components/form-confirmation/form-confirmation.component'; 
 import { ViewFormComponent } from './components/view-form/view-form.component'; 
 import { LoginComponent } from './components/login/login.component'; 
 import { AboutUsComponent } from './components/about-us/about-us.component'; 
@@ -17,7 +16,9 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import {MAT_DIALOG_DATA, MatDialogModule} from '@angular/material/dialog';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 @NgModule({
   declarations: [
     HomePageComponent,
@@ -27,7 +28,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     AboutUsComponent,
     SubscribePlanComponent,
     FormOverviewComponent,
-    FormConfirmationComponent,
     FormListComponent,
   ],
   imports: [
@@ -40,8 +40,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatSelectModule,
     ReactiveFormsModule,
     FormsModule,
-    DatePipe
+    DatePipe,
+    MatDialogModule,
+    MatCheckboxModule,
+    MatProgressSpinnerModule
+    
   ],
-  providers:[DatePipe]
+  providers:[DatePipe,{provide:MAT_DIALOG_DATA, useValue:{formData: {}}}]
 })
 export class PublicModule { }

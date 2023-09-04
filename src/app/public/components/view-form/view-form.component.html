@@ -38,26 +38,27 @@
         </div>
       </div>
       <div class="submit-btn-area">
-        <div class="btn btn-danger">Submit Reponse</div>
+        <button class="btn">Submit Reponse</button>
       </div>
     </div>
     <div class="submit-responses-details">
       <form [formGroup]="responseDetails">
-        <mat-form-field appearance="outline">
-          <input type="checkbox" formControlName="asAnnonymous" /><span>&emsp; Submit as an Annonymous</span>
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-          <input type="text" formControlName="name" matInput placeholder="Name" />
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-          <input type="email" formControlName="email" matInput  placeholder="Email" />
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-          <input type="text" formControlName="age" matInput placeholder="Age" />
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-          <input type="text" formControlName="location" matInput placeholder="Location" />
-        </mat-form-field>
+        <mat-checkbox class="example-margin" formControlName="asAnnonymous">Submit as an Annonymous</mat-checkbox><br><br>
+        <div *ngIf="responseDetails.get('asAnnonymous')?.value === false">
+          <mat-form-field>
+            <input type="text" formControlName="name" matInput placeholder="Name" />
+          </mat-form-field>
+          <mat-form-field>
+            <input type="email" formControlName="email" matInput  placeholder="Email" />
+          </mat-form-field>
+          <mat-form-field>
+            <input type="text" formControlName="age" matInput placeholder="Age" />
+          </mat-form-field>
+          <mat-form-field>
+            <input type="text" formControlName="location" matInput placeholder="Location" />
+          </mat-form-field>
+        </div>
+        
       </form>
     </div>
   </div>
