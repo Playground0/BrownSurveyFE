@@ -28,5 +28,9 @@
     left: 50% !important;
     z-index: 100;
 }
+::ng-deep .mat-progress-spinner circle,
+.mat-spinner circle{
+    stroke : #c10000
+  }
 
 
