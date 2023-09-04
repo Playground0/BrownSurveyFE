@@ -9,8 +9,9 @@ import { Form } from '../../models/saveForm.model';
 import { DatePipe } from '@angular/common';
 import { Observable } from 'rxjs';
 import { AdminConfiguration } from '../../models/UIModels/AdminConfiguration';
-
-
+import {MatDialog, MatDialogModule} from '@angular/material/dialog';
+import { FormOverviewComponent } from '../form-overview/form-overview.component';
+import * as AdminConfigurationConstants from '../../../shared/Constants/AdminConfiguration.constants';
 @Component({
   selector: 'app-create-form',
   templateUrl: './create-form.component.html',
@@ -24,24 +25,22 @@ export class CreateFormComponent implements OnInit {
   isTitleAMatch: boolean = false;
   isTitleAuthenticating: boolean = false;
   isTitleAuthenticationDone: boolean = false;
-  listOfCategories!: Observable<AdminConfiguration[]>;
-  listOfQuestionTypes!: Observable<AdminConfiguration[]>;
+  listOfCategories$!: Observable<AdminConfiguration[]>;
+  listOfQuestionTypes$!: Observable<AdminConfiguration[]>;
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute, private publicCommonService: PublicCommonService, 
-    private fb: FormBuilder, private publicApiService: PublicApiService, private datePipe: DatePipe) { }
+    private fb: FormBuilder, private publicApiService: PublicApiService, private datePipe: DatePipe,public dialog: MatDialog) { }
 
 
   ngOnInit(): void {
     this.getFormTypeFromUrl();
   }
-  initializeForm() {
-    this.customForm = this.fb.group({
+  initializeForm() : FormGroup {
+    return this.fb.group({
       category: new FormControl('', Validators.required),
       title: new FormControl('', Validators.required),
       forms: this.fb.array([]),
     });
-    this.onChangeTitle();
-    this.addForm();
   }
   onChangeTitle() {
     let value: string = this.customForm.get('title')?.value;
@@ -69,7 +68,9 @@ export class CreateFormComponent implements OnInit {
   }
   getFormTypeFromUrl() {
     this.activatedRoute.params.subscribe((param) => {
-      this.initializeForm();
+      this.customForm = this.initializeForm();
+      this.onChangeTitle();
+      this.addForm();
       let urlKey = param['formType'];
       this.formType = this.publicCommonService.getFormKey(urlKey);
       this.formLimit = this.publicCommonService.getFormLimit(urlKey);
@@ -104,7 +105,6 @@ export class CreateFormComponent implements OnInit {
     }
     let formValue: CustomForm = this.customForm.value;
     let currentDate : Date = new Date(Date.now());
-
     let submitForm: Form = {
       userID: "0",
       userName: "0",
@@ -117,22 +117,21 @@ export class CreateFormComponent implements OnInit {
       formExpirydate: this.datePipe.transform(currentDate.setDate(currentDate.getDate() + 7), "MM/dd/yyyy"),
       formQuestions: formValue.forms
     }
-    console.log(submitForm);
-    this.publicApiService.submitForm(submitForm).subscribe({
-      next: (res) => {
-        if(res){
-          console.log("Form Created");
-        }
-      },
-      error: (err) => {
-        console.log(err);
-      }
-     });
+    const dialogRef = this.dialog.open(FormOverviewComponent,{
+      data: {formData:submitForm},
+      height:'80%',
+      width:'75%'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.router.navigateByUrl(`/view-form/${result.id}`)
+    });
+    return;
   }
   getFormCategories(){
-    this.listOfCategories = this.publicApiService.getAdminConfigurations(this.formType,"Form Category");
+    this.listOfCategories$ = this.publicApiService.getAdminConfigurations(this.formType,AdminConfigurationConstants.FormCategory);
   }
   getQuestionTypes(){
-    this.listOfQuestionTypes = this.publicApiService.getAdminConfigurations(this.formType,"Question Types");
+    this.listOfQuestionTypes$ = this.publicApiService.getAdminConfigurations(this.formType,AdminConfigurationConstants.QuestionTypes);
   }
 }

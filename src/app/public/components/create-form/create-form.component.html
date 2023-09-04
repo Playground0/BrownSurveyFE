@@ -1,67 +1,66 @@
 <div class="container">
-  <form [formGroup]="customForm">
-  <div class="rounded-box form-type mt-1 row">
-    <div class="col-md-2">
-      <mat-form-field class="form-category" appearance="outline" >
-        <!-- <mat-label>Choose one</mat-label> -->
-        <mat-select placeholder="Category" formControlName="category">
-          <mat-option>Clear</mat-option> 
-          <mat-option [value]="category.name" *ngFor="let category of listOfCategories | async">{{category.name}}</mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
-    <div class="col-md-8">
-      <mat-form-field class="form-name" appearance="outline">
-        <input formControlName="title" type="email" (keyup)="onChangeTitle()" matInput placeholder="{{ formType }} Title" />
-      </mat-form-field>
-    </div>
-    <div class="col-md-2 form-authenticity">
-      <div > 
-        <span *ngIf="(customForm.get('title')?.value.length < 5)">Authenticity</span>
-        <span *ngIf="(customForm.get('title')?.value.length >= 5) && isTitleAuthenticating">Authenticating ...</span>
-        <span class="bad-title" *ngIf="isTitleAuthenticationDone && isTitleAMatch">Not an Authentic Title</span>
-        <span class="good-to-go-title" *ngIf="isTitleAuthenticationDone && !isTitleAMatch">Good To Go</span>
-      </div>
-    </div>
-  </div>
 
-  <ng-container formArrayName="forms">
-    <div *ngFor="let form of forms.controls; let i = index">
-      <div class="rounded-box forms" [formGroupName]="i">
-        <div class="form-area">
-          <div class="row">
-              <div class="col-md-9">
-                  <mat-form-field appearance="outline">
-                      <input type="text" formControlName="question" matInput placeholder="Question" />
-                    </mat-form-field>
-              </div>
-              <div class="col-md-3">
-                  <mat-form-field appearance="outline">
-                      <mat-select placeholder="Type" formControlName="type">
-                        <mat-option>Clear</mat-option>
-                        <mat-option [value]="type.name" *ngFor="let type of listOfQuestionTypes | async">{{type.name}}</mat-option>
-                      </mat-select>
-                    </mat-form-field>
-              </div>
-          </div>
-          <div class="row form-options">
-          </div>
-        </div>
-        <div class="delete-btn">
-          <button class="btn" title="Delete" (click)="deleteForm(i)"><mat-icon>delete</mat-icon></button>
+  <form [formGroup]="customForm">
+    <div class="rounded-box form-type mt-1 row">
+      <div class="col-md-2">
+        <mat-form-field class="form-category" appearance="outline" >
+          <!-- <mat-label>Choose one</mat-label> -->
+          <mat-select placeholder="Category" formControlName="category">
+            <mat-option>Clear</mat-option> 
+            <mat-option [value]="category.name" *ngFor="let category of listOfCategories$ | async">{{category.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-md-8">
+        <mat-form-field class="form-name" appearance="outline">
+          <input formControlName="title" type="email" (keyup)="onChangeTitle()" matInput placeholder="{{ formType }} Title" />
+        </mat-form-field>
+      </div>
+      <div class="col-md-2 form-authenticity">
+        <div > 
+          <span *ngIf="(customForm.get('title')?.value.length < 5)">Authenticity</span>
+          <span *ngIf="(customForm.get('title')?.value.length >= 5) && isTitleAuthenticating">Authenticating ...</span>
+          <span class="bad-title" *ngIf="isTitleAuthenticationDone && isTitleAMatch">Not an Authentic Title</span>
+          <span class="good-to-go-title" *ngIf="isTitleAuthenticationDone && !isTitleAMatch">Good To Go</span>
         </div>
       </div>
     </div>
-  </ng-container>
-  <div class="buttons">
-    <div>
-      <button class="btn" [disabled]="forms.controls.length === formLimit" (click)="addForm()">Add Form</button>
-    </div>
-    <div>
-      <button class="btn" (click)="reviewForm()">Review Form</button>
-    </div>
-  </div>
-</form>
   
-  <router-outlet></router-outlet>
+    <ng-container formArrayName="forms">
+      <div *ngFor="let form of forms.controls; let i = index">
+        <div class="rounded-box forms" [formGroupName]="i">
+          <div class="form-area">
+            <div class="row">
+                <div class="col-md-9">
+                    <mat-form-field appearance="outline">
+                        <input type="text" formControlName="question" matInput placeholder="Question" />
+                      </mat-form-field>
+                </div>
+                <div class="col-md-3">
+                    <mat-form-field appearance="outline">
+                        <mat-select placeholder="Type" formControlName="type">
+                          <mat-option>Clear</mat-option>
+                          <mat-option [value]="type.name" *ngFor="let type of listOfQuestionTypes$ | async">{{type.name}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                </div>
+            </div>
+            <div class="row form-options">
+            </div>
+          </div>
+          <div class="delete-btn">
+            <button class="btn" title="Delete" (click)="deleteForm(i)"><mat-icon>delete</mat-icon></button>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+    <div class="buttons">
+      <div>
+        <button class="btn" [disabled]="forms.controls.length === formLimit" (click)="addForm()">Add Form</button>
+      </div>
+      <div>
+        <button class="btn" (click)="reviewForm()">Review Form</button>
+      </div>
+    </div>
+  </form>
 </div>

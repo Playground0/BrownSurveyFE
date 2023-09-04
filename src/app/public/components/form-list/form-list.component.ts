@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { BasicFormDetails } from '../../models/UIModels/BasicFormDetails.model';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-form-list',
@@ -9,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class FormListComponent implements OnInit  {
 
-  @Input() list : any[] = [];
+  @Input() list$! : Observable<BasicFormDetails[]>;
   constructor(private router: Router){}
   ngOnInit(): void {
   }

@@ -15,6 +15,9 @@ export class PublicApiService {
   apiUrl = this.localHost ? "http://localhost:8080/api" : "https://zany-cyan-puffer-slip.cyclic.app/api";
   constructor(private http: HttpClient) { }
 
+  getAllFormByType(formType:string): Observable<BasicFormDetails[]>{
+    return this.http.get<BasicFormDetails[]>(`${this.apiUrl}/forms/${formType}/getAll`);
+  }
   getAllForms() : Observable<BasicFormDetails[]>{
     return this.http.get<BasicFormDetails[]>(`${this.apiUrl}/forms/getAll`);
   }
