@@ -1,12 +1,26 @@
 <div class="container">
 
   <!-- start list of form -->
+  <div class="rounded-box info-box">
+    <div class="row mt-2">
+      <div class="col"></div>
+      <div class="col-md-8">
+        <div class="jutify-content">
+          <h1><strong>Create Surveys, Quizes and Opinion Polls For Free</strong></h1>
+        </div>
+        <div class="jutify-content">
+          <span>Here is the list for you to play with!</span>
+        </div>
+      </div>
+      <div class="col"></div>
+    </div>
+  </div>
   <div class="list-of-forms">
     <div class="row">
       <div class="col">
         <app-form-list [list]="listOfSurvey">
           <div class="header">
-            <span>Top Surveys</span>
+            <span>Surveys Created : {{listOfSurvey.length}}</span>
           </div>
           <button class="btn" (click)="createForm('survey')">Create Survey</button>
         </app-form-list>
@@ -14,7 +28,7 @@
       <div class="col">
         <app-form-list [list]="listOfQuizzes">
           <div class="header">
-            <span>Top Quizzes</span>
+            <span>Quizzes Created: {{listOfQuizzes.length}}</span>
           </div>
           <button class="btn" (click)="createForm('quiz')">Create Quiz</button>
         </app-form-list>
@@ -22,7 +36,7 @@
       <div class="col">
         <app-form-list [list]="listOfOpinions">
           <div class="header">
-            <span>Top Opinions</span>
+            <span>Opinions Created: {{listOfOpinions.length}}</span>
           </div>
           <button class="btn" (click)="createForm('opinion')">Create Opinion</button>
         </app-form-list>

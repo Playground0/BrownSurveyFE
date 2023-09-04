@@ -1,1 +1,66 @@
-<p>view-form works!</p>
+<div class="container">
+  <div *ngIf="loader">
+    Loading...
+  </div>
+  <div *ngIf="!loader">
+    <div class="top-part">
+      <div class="title">
+        <h1><strong>{{formDetails? formDetails.formTitle : ""}}</strong></h1>
+      </div>
+      <div class="row">
+        <div class="col-md-3">
+          <div class="basic-info">
+            Form Created By: {{formDetails? formDetails.userName : ""}}
+          </div>
+        </div>
+        <div class="col-md-6">
+          <hr>
+        </div>
+        <div class="col-md-3">
+          <div class="basic-info">
+            Expiry Date: {{formDetails? formDetails.formExpirydate : ""}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="bottom-part">
+      <div class="question-area">
+        <div *ngFor="let question of questions" class="rounded-box">
+            <div class="question-details">
+                    <div><span>{{question.question}}</span> </div>
+                    <div class="skip-review">
+                        <span><a class="btn">Skip</a> | <a class="btn">Review Later</a></span>
+                    </div>
+            </div>
+            <div class="answer-area">
+                <div class="rounded-box"></div>
+            </div>
+        </div>
+      </div>
+      <div class="submit-btn-area">
+        <div class="btn btn-danger">Submit Reponse</div>
+      </div>
+    </div>
+    <div class="submit-responses-details">
+      <form [formGroup]="responseDetails">
+        <mat-form-field appearance="outline">
+          <input type="checkbox" formControlName="asAnnonymous" /><span>&emsp; Submit as an Annonymous</span>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <input type="text" formControlName="name" matInput placeholder="Name" />
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <input type="email" formControlName="email" matInput  placeholder="Email" />
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <input type="text" formControlName="age" matInput placeholder="Age" />
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <input type="text" formControlName="location" matInput placeholder="Location" />
+        </mat-form-field>
+      </form>
+    </div>
+  </div>
+
+
+</div>
