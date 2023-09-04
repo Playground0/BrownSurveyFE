@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { BasicFormDetails } from '../../models/UIModels/BasicFormDetails.model'; 
+import { PublicApiService } from '../../services/public-api.service';
+
 
 @Component({
   selector: 'app-home-page',
@@ -9,48 +12,33 @@ import { Router } from '@angular/router';
 export class HomePageComponent implements OnInit{
 
   
-  listOfSurvey: any[] = [];
-  listOfQuizzes: any[] = [];
-  listOfOpinions: any[] = []; 
-  constructor(private router:Router){}
+  allForms: BasicFormDetails[] = [];
+  listOfSurvey: BasicFormDetails[] = [];
+  listOfQuizzes: BasicFormDetails[] = [];
+  listOfOpinions: BasicFormDetails[] = [];
+ 
+  constructor(private router:Router,private apiService: PublicApiService){}
   ngOnInit(): void {
-    this.getListOfSurveys();
-    this.getListOfQuizzes();
-    this.getListOfOpinions()
+    this.getAllForms();
   }
   createForm(formType: string){
     this.router.navigateByUrl(`/create/${formType}`);
   }
-
-  getListOfSurveys(){
-    for(let i = 0; i<=12; i++){
-      let survey = {
-        id: i,
-        name: 'New Form Survey ' + i,
-        type: 'Survey'
+  getAllForms(){
+    this.apiService.getAllForms().subscribe({
+      next: (res: BasicFormDetails[]) => {
+        this.allForms = res;
+        this.filterForms();
+      },
+      error: (err) => {
+        console.log(err);
       }
-      this.listOfSurvey.push(survey);
-    }
+    });
   }
-  getListOfQuizzes(){
-    for(let i = 0; i<=15; i++){
-      let survey = {
-        id: i,
-        name: 'New Form Quiz ' + i,
-        type: 'Quiz'
-      }
-      this.listOfQuizzes.push(survey);
-    }
-  }
-  getListOfOpinions(){
-    for(let i = 0; i<=5; i++){
-      let survey = {
-        id: i,
-        name: 'New Form Opinion ' + i,
-        type: 'Opinion'
-      }
-      this.listOfOpinions.push(survey);
-    }
+  filterForms(){
+    this.listOfSurvey = this.allForms.filter((ele) => ele.formType === "Survey");
+    this.listOfQuizzes = this.allForms.filter((ele) => ele.formType === "Quiz");
+    this.listOfOpinions = this.allForms.filter((ele) => ele.formType === "Opinion");
   }
   nextTrending(){
     console.log("I'm here")

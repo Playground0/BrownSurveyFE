@@ -1,0 +1,53 @@
+@import url(../../../shared/styles/globalstyles.css);
+
+.top-part{
+    margin-top: 1rem;
+}
+.title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #595260;
+}
+.basic-info{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #c10000;
+    border-radius: 20px;
+    color: #eeeeee;
+    padding: 2%;
+}
+.bottom-part{
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+}
+.question-area{
+    margin-bottom: 2rem;
+}
+.rounded-box{
+    background-color: #EEEEEE;
+}
+.question-details{
+    margin:4%;
+    margin-left:6%;
+    margin-right: 6%;
+    font-size: 18px;
+    display: flex;
+    justify-content: space-between;
+}
+.skip-review{
+    margin-top: -0.6rem;
+}
+.answer-area .rounded-box{
+    background-color: #dedede;
+    height: 16vh;   
+    width: 60vw;
+    margin-left: 4rem;
+    margin-top: -2rem;
+}
+.submit-btn-area{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

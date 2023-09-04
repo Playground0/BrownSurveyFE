@@ -3,6 +3,31 @@
 .container {
   margin-top: 1%;
 }
+.rounded-box .info-box{
+  height:0;
+}
+.info-box{
+  /* height: 10%; */
+  height: 9vh;
+  background-color: #c10000;
+  margin-top: 0;
+}
+.jutify-content{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.info-box h1{
+  color: #eeeeee;
+}
+.info-box span{
+  margin-top: -10px;
+  color: #eeeeee;
+}
+.form-type {
+  height: 9vh;
+  background-color: #eeeeee;
+}
 .header {
   padding: 7%;
   border-bottom: 1px solid #dedede;

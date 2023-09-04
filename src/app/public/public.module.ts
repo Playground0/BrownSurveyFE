@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 
 import { PublicRoutingModule } from './public-routing.module';
 import { HomePageComponent } from './components/home-page/home-page.component'; 
@@ -39,7 +39,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatFormFieldModule,
     MatSelectModule,
     ReactiveFormsModule,
-    FormsModule
-  ]
+    FormsModule,
+    DatePipe
+  ],
+  providers:[DatePipe]
 })
 export class PublicModule { }
