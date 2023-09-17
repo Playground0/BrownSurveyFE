@@ -47,18 +47,18 @@
 
   <!-- start top-trending-form -->
   <div class="rounded-box background-image">
-    <div class="d-flex justify-content-between">
-      <div>
+    <div *ngIf="(trendingForm$| async) as form;" class="d-flex justify-content-between">
+      <div >
         <div class="top-trending-form">
-          <span class="top-trending-form-title">Top Trending Surveys</span>
-          <span class="top-trending-form-list">Form Name</span>
-          <span class="top-trending-form-list">Type</span>
+          <span class="top-trending-form-title">Top Trending Form</span>
+          <span class="top-trending-form-list">Form Name: <span class="badge custom-badge">{{form.formTitle}}</span> </span>
+          <span class="top-trending-form-list">Type: <span class="badge custom-badge">{{form.formType}}</span></span>
           <span class="top-trending-form-list">Popularity</span>
-          <span class="top-trending-form-list">Created By</span>
+          <span class="top-trending-form-list">Created By: <span class="badge custom-badge">{{form.createdBy}}</span></span>
         </div>
       </div>
       <div class="next-btn">
-        <button class="btn" (click)="nextTrending()">
+        <button class="btn" (click)="showTrending(form)">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="1.54em"
@@ -76,34 +76,25 @@
   <!-- end top-trending-form -->
 
   <!-- start contributors -->
-  <div class="rounded-box primary-color">
-    <div class="contributor-text">
+  <div class="rounded-box primary-color" *ngIf="(contributorsList$| async) as contributor;">
+    <div class="contributor-text" >
       <h1>Contributors</h1>
     </div>
     <div class="profile">
       <mat-icon>account_circle</mat-icon>
     </div>
     <div class="contributor-info">
-      <span class="contributor-name">Contributor Name</span>
+      <span class="contributor-name">{{contributor[currContributor].cont_name}}</span>
       <p class="contributo-desc">
-        Lorem Ipsum is simply dummy text of the printing and typesetting
-        industry. Lorem Ipsum has been the industry's standard dummy text ever
-        since the 1500s, when an unknown printer took a galley of type and
-        scrambled it to make a type specimen book.
+        {{contributor[currContributor].cont_desc}}
       </p>
     </div>
     <div class="next-contributor">
-      <button class="btn" (click)="nextTrending()">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          height="1.54em"
-          viewBox="0 0 448 512"
-        >
-          <!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
-          <path
-            d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"
-          />
-        </svg>
+      <button [disabled]="currContributor === 0" class="btn" (click)="prevContributor()">
+        <mat-icon>chevron_left</mat-icon>
+      </button>
+      <button [disabled]="contributor.length - 1 === currContributor" class="btn" (click)="nextContributor()">
+        <mat-icon>chevron_right</mat-icon>
       </button>
     </div>
   </div>

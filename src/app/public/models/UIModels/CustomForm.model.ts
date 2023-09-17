@@ -6,7 +6,7 @@ export interface CustomForm{
 export interface FormQuestions{
     question : string,
     type: string,
-    options: QuestionOptions[]
+    options: QuestionOptions | string
 }
 export class QuestionOptions {
     "option1": string;

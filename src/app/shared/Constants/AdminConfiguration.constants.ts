@@ -1,3 +1,12 @@
 export const Status = "Form Status";
 export const FormCategory = "Form Category";
 export const QuestionTypes = "Question Types";
+export const TextField = "Text Field";
+export const MultipleChoiceSingle = "Multiple Choice - Single";
+export const MultipleChoiceMultiple = "Multiple Choice - Multiple";
+export const OptionswithPercentage = "Options with Percentage";
+export const OptionswithImages = "Options with Images";
+export const OptionswithAudioFiles = "Options with Audio Files";
+export const Percentage = "Percentage";
+export const Scale = "Scale";
+export const YesNo = "Yes/No";

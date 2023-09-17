@@ -28,42 +28,99 @@
     <div class="bottom-part">
       <div class="question-area">
         <div *ngFor="let question of questions" class="rounded-box">
-            <div class="question-details">
-                    <div><span>{{question.question}}</span> </div>
-                    <div class="skip-review">
-                        <span><a class="btn">Skip</a> | <a class="btn">Review Later</a></span>
-                    </div>
+          <div class="question-details">
+            <div><span>{{question.question}}</span> </div>
+            <div class="skip-review">
+              <span *ngIf="formDetails?.formType !== 'Opinion'"><a class="btn">Skip</a> | <a class="btn">Review
+                  Later</a></span>
             </div>
-            <div class="answer-area">
-                <div class="rounded-box"></div>
+          </div>
+          <div class="answer-area">
+            <div class="rounded-box">
+              <div *ngIf="question.type === AdminConstants.Percentage">
+                <!-- <input type="range" name="" id=""> -->
+                <mat-slider min="0" max="100000" step="1000" showTickMarks discrete [displayWith]="formatLabel">
+                  <input matSliderThumb>
+                </mat-slider>
+              </div>
+              <mat-radio-group aria-label="Select an option" *ngIf="question.type === AdminConstants.YesNo">
+                <mat-radio-button class="example-margin" value="1">Yes</mat-radio-button>
+                <mat-radio-button class="example-margin" value="2">No</mat-radio-button>
+              </mat-radio-group>
+              <mat-form-field appearance="outline" class="example-full-width w-100"
+                *ngIf="question.type === AdminConstants.TextField">
+                <mat-label>Start Writing your answer</mat-label>
+                <textarea matInput placeholder="Your answer goes here..."></textarea>
+              </mat-form-field>
+              <mat-radio-group aria-label="Select an option"
+                *ngIf="question.type === AdminConstants.MultipleChoiceSingle">
+                <mat-radio-button class="example-margin" value="1">Option 1</mat-radio-button>
+                <mat-radio-button class="example-margin" value="2">Option 2</mat-radio-button>
+                <mat-radio-button class="example-margin" value="1">Option 3</mat-radio-button>
+                <mat-radio-button class="example-margin" value="2">Option 4</mat-radio-button>
+              </mat-radio-group>
+              <div *ngIf="question.type === AdminConstants.MultipleChoiceMultiple">
+                <mat-checkbox class="example-margin">Option 1</mat-checkbox>
+                <mat-checkbox class="example-margin">Option 2</mat-checkbox>
+                <mat-checkbox class="example-margin">Option 3</mat-checkbox>
+                <mat-checkbox class="example-margin">Option 4</mat-checkbox>
+              </div>
+              <mat-radio-group aria-label="Select an option"
+                *ngIf="question.type === AdminConstants.OptionswithPercentage">
+                <mat-radio-button class="example-margin" value="1">Option 1</mat-radio-button>
+                <mat-radio-button class="example-margin" value="2">Option 2</mat-radio-button>
+                <mat-radio-button class="example-margin" value="1">Option 3</mat-radio-button>
+                <mat-radio-button class="example-margin" value="2">Option 4</mat-radio-button>
+              </mat-radio-group>
+              <mat-radio-group aria-label="Select an option" *ngIf="question.type === AdminConstants.OptionswithImages">
+                <mat-radio-button class="example-margin" value="1">Option 1</mat-radio-button>
+                <mat-radio-button class="example-margin" value="2">Option 2</mat-radio-button>
+                <mat-radio-button class="example-margin" value="1">Option 3</mat-radio-button>
+                <mat-radio-button class="example-margin" value="2">Option 4</mat-radio-button>
+              </mat-radio-group>
+              <mat-radio-group aria-label="Select an option"
+                *ngIf="question.type === AdminConstants.OptionswithAudioFiles">
+                <mat-radio-button class="example-margin" value="1">Option 1</mat-radio-button>
+                <mat-radio-button class="example-margin" value="2">Option 2</mat-radio-button>
+                <mat-radio-button class="example-margin" value="1">Option 3</mat-radio-button>
+                <mat-radio-button class="example-margin" value="2">Option 4</mat-radio-button>
+              </mat-radio-group>
+              <div *ngIf="question.type === AdminConstants.Scale">
+                <button class="scale-box btn" *ngFor="let box of scaleBox">
+                  {{box}}
+                </button>
+              </div>
             </div>
+          </div>
         </div>
       </div>
       <div class="submit-btn-area">
-        <button class="btn">Submit Reponse</button>
+        <button class="btn" (click)="submitResponse()">Submit Reponse</button>
       </div>
     </div>
     <div class="submit-responses-details">
       <form [formGroup]="responseDetails">
-        <mat-checkbox class="example-margin" formControlName="asAnnonymous">Submit as an Annonymous</mat-checkbox><br><br>
+        <mat-checkbox class="example-margin" formControlName="asAnnonymous">Submit as an
+          Annonymous</mat-checkbox><br><br>
         <div *ngIf="responseDetails.get('asAnnonymous')?.value === false">
-          <mat-form-field>
-            <input type="text" formControlName="name" matInput placeholder="Name" />
+          <mat-form-field appearance="outline">
+            <mat-label>Name</mat-label>
+            <input type="text" formControlName="name" matInput placeholder="eg. John" />
           </mat-form-field>
-          <mat-form-field>
-            <input type="email" formControlName="email" matInput  placeholder="Email" />
+          <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input type="email" formControlName="email" matInput placeholder="eg. something@gmail.com" />
           </mat-form-field>
-          <mat-form-field>
-            <input type="text" formControlName="age" matInput placeholder="Age" />
+          <mat-form-field appearance="outline">
+            <mat-label>Age</mat-label>
+            <input type="text" formControlName="age" matInput placeholder="eg. 40" />
           </mat-form-field>
-          <mat-form-field>
-            <input type="text" formControlName="location" matInput placeholder="Location" />
+          <mat-form-field appearance="outline">
+            <mat-label>Location</mat-label>
+            <input type="text" formControlName="location" matInput placeholder="eg. Hyderabad" />
           </mat-form-field>
         </div>
-        
       </form>
     </div>
   </div>
-
-
 </div>

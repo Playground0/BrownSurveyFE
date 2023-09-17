@@ -39,14 +39,11 @@ export class FormOverviewComponent implements OnInit{
     let formValue = this.submitForm.value;
     let submitForm: Form = this.data.formData;
     submitForm.formStatus = formValue.status;
-
-    console.log(submitForm);
     this.apiService.submitForm(submitForm).subscribe({
       next: (res:any) => {
         if(res){
           this.submitLoader = false;
           this.dialogRef.close({id:res._id});
-          console.log("Form Created");
         }
       },
       error: (err) => {
@@ -57,5 +54,8 @@ export class FormOverviewComponent implements OnInit{
   }
   getStatusValues(){
     this.statusDropDown$ = this.apiService.getAdminConfigurations(this.data.formData.formType,AdminConfigurationConstants.Status);
+  }
+  goBackToForm(){
+    this.dialogRef.close();
   }
 }

@@ -28,9 +28,29 @@
     left: 50% !important;
     z-index: 100;
 }
-::ng-deep .mat-progress-spinner circle,
+.mat-progress-spinner circle,
 .mat-spinner circle{
     stroke : #c10000
   }
+  .custom-badge{
+    color: #eeeeee;
+    background-color: #C10000;
+  }
+  mat-slider {
+    width: 50rem;
+  }
 
-
+  .mat-radio-button.mat-accent {
+    &.mat-radio-checked .mat-radio-outer-circle {
+      border-color: #C10000; 
+    }
+  
+    .mat-radio-inner-circle {
+      color: #C10000;
+      background-color: #C10000 ;
+    }
+  
+    .mat-radio-ripple .mat-ripple-element {
+      background-color: #C10000 !important;
+    }
+  }
