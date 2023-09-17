@@ -5,6 +5,7 @@
       <div class="col-md-2">
         <mat-form-field class="form-category" appearance="outline" >
           <!-- <mat-label>Choose one</mat-label> -->
+          <mat-label>Category</mat-label>
           <mat-select placeholder="Category" formControlName="category">
             <mat-option>Clear</mat-option> 
             <mat-option [value]="category.name" *ngFor="let category of listOfCategories$ | async">{{category.name}}</mat-option>
@@ -13,7 +14,8 @@
       </div>
       <div class="col-md-8">
         <mat-form-field class="form-name" appearance="outline">
-          <input formControlName="title" type="email" (keyup)="onChangeTitle()" matInput placeholder="{{ formType }} Title" />
+          <mat-label>{{ formType }} Title</mat-label>
+          <input formControlName="title" type="text" (keyup)="onChangeTitle()" matInput placeholder="Title goes like..." />
         </mat-form-field>
       </div>
       <div class="col-md-2 form-authenticity">
@@ -33,19 +35,71 @@
             <div class="row">
                 <div class="col-md-9">
                     <mat-form-field appearance="outline">
-                        <input type="text" formControlName="question" matInput placeholder="Question" />
+                      <mat-label>Question</mat-label>
+                        <input type="text" formControlName="question" matInput placeholder="Question goes like..." />
                       </mat-form-field>
                 </div>
                 <div class="col-md-3">
                     <mat-form-field appearance="outline">
-                        <mat-select placeholder="Type" formControlName="type">
+                        <mat-label>Type</mat-label>
+                        <mat-select (selectionChange)="checkSelectValue($event.value,i)" placeholder="Type" formControlName="type">
                           <mat-option>Clear</mat-option>
-                          <mat-option [value]="type.name" *ngFor="let type of listOfQuestionTypes$ | async">{{type.name}}</mat-option>
+                          <mat-option [value]="type.name" *ngFor="let type of listOfQuestionTypes">{{type.name}}</mat-option>
                         </mat-select>
                       </mat-form-field>
                 </div>
             </div>
-            <div class="row form-options">
+            <div formGroupName="options" *ngIf="form.get('showOption')?.value" class="row form-options">
+                <div class="options-files" *ngIf="form.get('type')?.value === AdminConstants.OptionswithImages || form.get('type')?.value === AdminConstants.OptionswithAudioFiles">
+                  <div class="row">
+                    1:<input class="col" type="file" name="" id="" formControlName="option1">
+                    3:<input class="col" type="file" name="" id="" formControlName="option3">
+                  </div>
+                  <div class="row">
+                    2:<input class="col" type="file" name="" id="" formControlName="option2">
+                    4:<input class="col" type="file" name="" id="" formControlName="option4">
+                  </div>
+                </div>
+                <div class="options-text" *ngIf="form.get('type')?.value === AdminConstants.MultipleChoiceSingle || form.get('type')?.value === AdminConstants.MultipleChoiceMultiple">
+                  <div class="row">
+                    <mat-form-field class="col" appearance="outline">
+                      <mat-label>Option 1</mat-label>
+                      <input  matInput type="text" name="" id="" formControlName="option1" placeholder="Start Typing your Option">
+                    </mat-form-field>
+                    <mat-form-field class="col" appearance="outline">
+                      <mat-label>Option 3</mat-label>
+                      <input  matInput type="text" name="" id="" formControlName="option3" placeholder="Start Typing your Option"> 
+                    </mat-form-field>
+                    
+                  </div>
+                  <div class="row">
+                    <mat-form-field class="col" appearance="outline">
+                      <mat-label>Option 2</mat-label>
+                      <input  matInput type="text" name="" id="" formControlName="option2" placeholder="Start Typing your Option">
+                    </mat-form-field>
+                    <mat-form-field class="col" appearance="outline">
+                      <mat-label>Option 4</mat-label>
+                      <input  matInput type="text" name="" id="" formControlName="option4" placeholder="Start Typing your Option">
+                    </mat-form-field>
+                  </div>
+                  
+                </div>
+                <div *ngIf="formType === 'Quiz' && (form.get('type')?.value === AdminConstants.MultipleChoiceSingle || form.get('type')?.value === AdminConstants.MultipleChoiceMultiple)" class="row">
+                  <div class="col">
+                    <mat-form-field class="col" appearance="outline">
+                      <mat-label>Answer 1</mat-label>
+                      <input  matInput type="text" name="" id="" formControlName="answer1" placeholder="Start Typing your First Answer">
+                    </mat-form-field>
+                  </div>
+                  <div class="col">
+                    <mat-form-field *ngIf="form.get('type')?.value === AdminConstants.MultipleChoiceMultiple" class="col" appearance="outline">
+                      <mat-label>Answer 2</mat-label>
+                      <input  matInput type="text" name="" id="" formControlName="answer2" placeholder="Start Typing your Second Answer">
+                    </mat-form-field>
+                  </div>
+                  <div class="col">
+                  </div>
+                </div>
             </div>
           </div>
           <div class="delete-btn">
@@ -56,7 +110,9 @@
     </ng-container>
     <div class="buttons">
       <div>
-        <button class="btn" [disabled]="forms.controls.length === formLimit" (click)="addForm()">Add Form</button>
+        <div *ngIf="formType !== 'Opinion'">
+          <button  class="btn" [disabled]="forms.controls.length === formLimit" (click)="addForm()">Add Form</button>
+        </div>
       </div>
       <div>
         <button class="btn" (click)="reviewForm()">Review Form</button>

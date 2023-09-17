@@ -20,11 +20,12 @@
   margin-top: 1%;
 }
 
-.button .btn {
+.btn {
   background-color: #c10000;
   color: #eeeeee;
-  width: 150px;
-  padding: 8%;
+  width: 10rem;
+  padding: 1%;
+  margin: 1%;
   box-shadow: none !important;
   border: none;
 }

@@ -4,8 +4,9 @@
         <div class="list-of-form">
             <!-- <span *ngFor="let form of list">{{form.name}}</span> -->
             <div class="list-group" *ngIf="(list$| async) as list;">
-                <button class="list-group-item list-group-item-action" *ngFor="let form of list" (click)="navigateToForm(form)">{{form.formTitle}}</button>
-                <button *ngIf="list && list.length >= 10" class="load-more">Load More...</button>
+                <button class="list-group-item list-group-item-action" *ngFor="let form of list" (click)="navigateToForm(form)">{{form.formTitle}} 
+                    <span *ngIf="+form.userCount > 0" class="badge custom-badge">{{form.userCount}} User(s) have taken This {{form.formType}} </span></button>
+                <button *ngIf="list && list.length >= 30" class="load-more">Load More...</button>
             </div>
         </div>
             <ng-content select=".btn"></ng-content>    

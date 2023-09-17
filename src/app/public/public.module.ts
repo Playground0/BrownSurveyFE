@@ -19,6 +19,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogModule} from '@angular/material/dialog';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatSliderModule} from '@angular/material/slider';
 @NgModule({
   declarations: [
     HomePageComponent,
@@ -43,8 +45,9 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     DatePipe,
     MatDialogModule,
     MatCheckboxModule,
-    MatProgressSpinnerModule
-    
+    MatProgressSpinnerModule,
+    MatRadioModule,
+    MatSliderModule
   ],
   providers:[DatePipe,{provide:MAT_DIALOG_DATA, useValue:{formData: {}}}]
 })

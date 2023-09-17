@@ -3,4 +3,6 @@ export interface BasicFormDetails{
     formType: string,
     formTitle: string,
     userID: string,
+    userCount: string,
+    createdBy: string
 }

@@ -27,6 +27,7 @@
 }
 .rounded-box{
     background-color: #EEEEEE;
+    height: auto;
 }
 .question-details{
     margin:4%;
@@ -40,11 +41,15 @@
     margin-top: -0.6rem;
 }
 .answer-area .rounded-box{
-    background-color: #dedede;
-    height: 16vh;   
-    width: 60vw;
+    height: auto;
+    border: 1px solid #dedede;   
+    margin-right: 5rem;
     margin-left: 4rem;
     margin-top: -2rem;
+    padding: 2%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .submit-btn-area{
     display: flex;
@@ -62,3 +67,12 @@
 .submit-responses-details{
     width: 50%;
 }
+.example-margin {
+    margin: 0 10px;
+  }
+  .scale-box{
+    background-color: #3f51b5;
+    color: white;
+    margin: 0.4rem;
+    width: 3rem;
+  }

@@ -5,6 +5,7 @@ import { TitleAuthentication } from '../models/AuthticationResponse.model';
 import { Form } from '../models/saveForm.model';
 import { BasicFormDetails } from '../models/UIModels/BasicFormDetails.model';
 import { AdminConfiguration } from '../models/UIModels/AdminConfiguration';
+import { ContributorList } from '../models/ContributorsList';
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +33,12 @@ export class PublicApiService {
   }
   getAdminConfigurations(formType:string,type:string): Observable<AdminConfiguration[]>{
     return this.http.get<AdminConfiguration[]>(`${this.apiUrl}/forms/admin/${formType}/${type}`);
+  }
+  getTrendingForm() : Observable<BasicFormDetails>{
+    return this.http.get<BasicFormDetails>(`${this.apiUrl}/forms/getTrendingForm`);
+  }
+  getContributorsList() : Observable<ContributorList[]>{
+    return this.http.get<ContributorList[]>(`${this.apiUrl}/misc/contributorsList`);
   }
   
 }
