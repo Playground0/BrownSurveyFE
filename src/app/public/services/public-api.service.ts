@@ -6,13 +6,14 @@ import { Form } from '../models/saveForm.model';
 import { BasicFormDetails } from '../models/UIModels/BasicFormDetails.model';
 import { AdminConfiguration } from '../models/UIModels/AdminConfiguration';
 import { ContributorList } from '../models/ContributorsList';
+import { FormAnswerModel } from '../models/SubmitForm';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PublicApiService {
 
-  localHost : boolean = false;
+  localHost : boolean = true;
   apiUrl = this.localHost ? "http://localhost:8080/api" : "https://zany-cyan-puffer-slip.cyclic.app/api";
   constructor(private http: HttpClient) { }
 
@@ -39,6 +40,9 @@ export class PublicApiService {
   }
   getContributorsList() : Observable<ContributorList[]>{
     return this.http.get<ContributorList[]>(`${this.apiUrl}/misc/contributorsList`);
+  }
+  submitAnswer(form: FormAnswerModel): Observable<any>{
+    return this.http.post<any>(`${this.apiUrl}/forms/submitAnswer`,form);
   }
   
 }

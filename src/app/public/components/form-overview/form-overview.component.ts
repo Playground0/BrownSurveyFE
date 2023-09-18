@@ -39,6 +39,7 @@ export class FormOverviewComponent implements OnInit{
     let formValue = this.submitForm.value;
     let submitForm: Form = this.data.formData;
     submitForm.formStatus = formValue.status;
+    console.log(submitForm);
     this.apiService.submitForm(submitForm).subscribe({
       next: (res:any) => {
         if(res){
