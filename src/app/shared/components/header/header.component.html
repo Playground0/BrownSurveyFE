@@ -20,7 +20,9 @@
       <button class="btn" [matMenuTriggerFor]="menu">Create</button>
       <button class="btn" (click)="goToPlans()">Subscribe</button>
       <button class="btn" (click)="goToAboutUs()">About Us</button>
-      <button class="btn" (click)="goToLogin()">Login</button>
+      <button class="btn" *ngIf="!loggedIn" (click)="goToLogin()">Login</button>
+      <button class="btn profile-btn" [matMenuTriggerFor]="profileMenu" *ngIf="loggedIn">
+        <span><mat-icon class="account-icon" >account_circle</mat-icon> {{loginText}}</span></button>
     </div>
   </div>
 </div>
@@ -35,5 +37,17 @@
   </button>
   <button mat-menu-item (click)="goToCreate('opinion')">
     <span>Opinion</span>
+  </button>
+</mat-menu>
+
+<mat-menu #profileMenu="matMenu">
+  <button mat-menu-item (click)="goToProfile('')">
+    <span>Profile</span>
+  </button>
+  <button mat-menu-item (click)="goToProfile('Need Support')">
+    <span>Need Support?</span>
+  </button>
+  <button mat-menu-item (click)="logout()">
+    <span>Log Out</span>
   </button>
 </mat-menu>

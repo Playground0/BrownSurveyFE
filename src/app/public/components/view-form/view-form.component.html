@@ -25,14 +25,14 @@
         </div>
       </div>
     </div>
-    <div class="bottom-part">
+    <div class="bottom-part shadow">
       <!-- <div *ngFor="let question of questions" class="rounded-box"> -->
       <!-- <div class="form-area"> -->
       <form [formGroup]="responseForm">
         <div class="answer-area">
           <div formArrayName="questionResponse">
             <div *ngFor="let form of questionResponse.controls; let i=index">
-              <div class="rounded-box">
+              <div class="rounded-box shadow">
                 <div [formGroupName]="i">
                   <div class="question-details">
                     <div><span>{{form.value?.question}}</span> </div>
@@ -41,7 +41,7 @@
                           Later</a></span>
                     </div>
                   </div>
-                  <div class="answer-details">
+                  <div class="answer-details shadow">
                     <div *ngIf="form.value.type === AdminConstants.Percentage">
                       <mat-slider min="0" max="100000" step="1000" showTickMarks discrete [displayWith]="formatLabel">
                         <input matSliderThumb formControlName="answer1">

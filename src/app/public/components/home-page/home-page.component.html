@@ -1,7 +1,7 @@
 <div class="container">
 
   <!-- start list of form -->
-  <div class="rounded-box info-box">
+  <div class="rounded-box info-box shadow-lg">
     <div class="row mt-2">
       <div class="col"></div>
       <div class="col-md-8">
@@ -46,8 +46,8 @@
   <!-- end list of form -->
 
   <!-- start top-trending-form -->
-  <div class="rounded-box background-image">
-    <div *ngIf="(trendingForm$| async) as form;" class="d-flex justify-content-between">
+  <div class="rounded-box background-image shadow">
+    <div *ngIf="(trendingForm$| async) as form;" class="d-flex justify-content-between ">
       <div >
         <div class="top-trending-form">
           <span class="top-trending-form-title">Top Trending Form</span>
@@ -76,7 +76,7 @@
   <!-- end top-trending-form -->
 
   <!-- start contributors -->
-  <div class="rounded-box primary-color" *ngIf="(contributorsList$| async) as contributor;">
+  <div class="rounded-box primary-color shadow-lg" *ngIf="(contributorsList$| async) as contributor;">
     <div class="contributor-text" >
       <h1>Contributors</h1>
     </div>
@@ -101,10 +101,10 @@
   <!-- end contributors -->
 
   <div class="donate">
-    <button class="btn"> <span>Like what you see, Please donate a coffee to the dev team!</span> </button>
+    <button class="btn shadow-lg"> <span>Like what you see, Please donate a coffee to the dev team!</span> </button>
   </div>
   <div class="donate mb-3">
-    <button class="btn">
+    <button class="btn shadow">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         height="1em"

@@ -1,6 +1,6 @@
 .header {
   margin-top: 2%;
-  margin-bottom: 2%;
+  margin-bottom: 1%;
 }
 .title {
   display: flex;
@@ -50,4 +50,13 @@
 }
 .line {
   border: 1px solid #ffffff;
+}
+.profile-btn{
+  color: #c10000;
+  position: relative;
+}
+.account-icon{
+  position: absolute;
+  left: -25px;
+  top: 24px;
 }

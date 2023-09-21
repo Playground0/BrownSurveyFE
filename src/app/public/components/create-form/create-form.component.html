@@ -1,7 +1,7 @@
 <div class="container">
 
   <form [formGroup]="customForm">
-    <div class="rounded-box form-type mt-1 row">
+    <div class="rounded-box form-type mt-1 row shadow">
       <div class="col-md-2">
         <mat-form-field class="form-category" appearance="outline" >
           <!-- <mat-label>Choose one</mat-label> -->
@@ -30,7 +30,7 @@
   
     <ng-container formArrayName="forms">
       <div *ngFor="let form of forms.controls; let i = index">
-        <div class="rounded-box forms" [formGroupName]="i">
+        <div class="rounded-box forms shadow" [formGroupName]="i">
           <div class="form-area">
             <div class="row">
                 <div class="col-md-9">

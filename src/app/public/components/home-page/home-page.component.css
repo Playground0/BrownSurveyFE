@@ -11,6 +11,7 @@
   height: 9vh;
   background-color: #c10000;
   margin-top: 0;
+  border: 1px solid #C10000;
 }
 .jutify-content{
   display: flex;
@@ -88,6 +89,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  border: 1px solid #c10000;
 }
 .contributor-text {
   transform: rotate(-90deg);
@@ -142,6 +144,9 @@
 }
 .donate .btn {
   color: #c10000;
+}
+.donate .btn:hover {
+  color: #c10000a9;
 }
 .donate svg {
   fill: #c10000;
