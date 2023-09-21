@@ -91,10 +91,10 @@
     </div>
     <div class="next-contributor">
       <button [disabled]="currContributor === 0" class="btn" (click)="prevContributor()">
-        <mat-icon>chevron_left</mat-icon>
+        <mat-icon class="navigate-contributor">chevron_left</mat-icon>
       </button>
       <button [disabled]="contributor.length - 1 === currContributor" class="btn" (click)="nextContributor()">
-        <mat-icon>chevron_right</mat-icon>
+        <mat-icon class="navigate-contributor">chevron_right</mat-icon>
       </button>
     </div>
   </div>

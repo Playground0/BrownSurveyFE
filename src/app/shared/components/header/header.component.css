@@ -50,13 +50,42 @@
 }
 .line {
   border: 1px solid #ffffff;
+  margin-bottom: 0px;
 }
 .profile-btn{
   color: #c10000;
-  position: relative;
 }
 .account-icon{
-  position: absolute;
-  left: -25px;
-  top: 24px;
+  float: left;
+  color: #c10000;
+}
+.form-btn{
+  display: flex;
+  justify-content: center;
+}
+.profile-btn{
+  display: flex;
+  justify-content: center;
+}
+.account-circle{
+  transform: scale(2);
+}
+.account-circle:hover{
+  color: grey;
+  transition: all 0.3s ease;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+}
+.login-text{
+  padding: 10px;
+}
+.profile-icons:hover{
+  color: grey;
+  transition: all 0.3s ease;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
 }

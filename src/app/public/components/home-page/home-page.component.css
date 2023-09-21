@@ -151,3 +151,6 @@
 .donate svg {
   fill: #c10000;
 }
+.navigate-contributor{
+  transform: scale(1.5);
+}

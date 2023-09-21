@@ -54,3 +54,6 @@
       background-color: #C10000 !important;
     }
   }
+::ng-deep .mat-mdc-menu-panel.mat-mdc-menu-panel{
+  border-radius: 35px;
+}

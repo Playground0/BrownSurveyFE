@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, map } from 'rxjs';
 import { LoginModel, SignUpModel } from 'src/app/public/models/login';
 import { AuthService } from '../auth/auth.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class LoginService {
   private userAuthDetails  = new BehaviorSubject<any>(null);
   userAuthDetails$ = this.userAuthDetails.asObservable();
 
-  constructor(private http: HttpClient, private authService: AuthService) { }
+  constructor(private http: HttpClient, private router: Router) { }
   login(loginDetails: LoginModel){
     return this.http.post(`${this.apiUrl}/auth/login`,loginDetails).pipe(map((res) => {
       this.setLocalData("authData",JSON.stringify(res));
@@ -42,6 +43,9 @@ export class LoginService {
         if(res.Action_Status === "SUCCESS"){
           this.removeLocalItem("authData");
           this.setUsetAuthDetails(null);
+          if(this.router.url.includes('profile')){
+            this.router.navigateByUrl('/login');
+          }
         }
       },
       error: (err) => {
