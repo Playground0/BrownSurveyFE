@@ -9,7 +9,7 @@ import { AuthService } from '../auth/auth.service';
 })
 export class LoginService {
 
-  localHost : boolean = true;
+  localHost : boolean = false;
   apiUrl = this.localHost ? "http://localhost:8080/api" : "https://zany-cyan-puffer-slip.cyclic.app/api";
   private userAuthDetails  = new BehaviorSubject<any>(null);
   userAuthDetails$ = this.userAuthDetails.asObservable();
