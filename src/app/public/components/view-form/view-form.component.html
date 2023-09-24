@@ -1,5 +1,5 @@
 <div class="container">
-  <div *ngIf="formloader && formSubmited" class="loader">
+  <div *ngIf="formloader && !formSubmited" class="loader">
     <div class="spinner">
       <mat-spinner></mat-spinner>
     </div>
@@ -12,7 +12,7 @@
       <div class="row">
         <div class="col-md-3">
           <div class="basic-info">
-            Form Created By: {{formDetails? formDetails.userName : ""}}
+            Form Created By: {{formDetails?.userName !== "0" ? formDetails?.userName : "Anonymous"}}
           </div>
         </div>
         <div class="col-md-6">
@@ -114,9 +114,11 @@
                         [value]="questions[i].options?.option4">{{questions[i].options?.option4}}</mat-radio-button>
                     </mat-radio-group>
                     <div *ngIf="form.value.type === AdminConstants.Scale">
-                      <button class="scale-box btn" *ngFor="let box of scaleBox" (click)="setScaleValue(box,i)">
-                        {{box}}
-                      </button>
+                      <ng-container >
+                        <button *ngFor="let box of scaleBox" [ngClass]="selectedScaleValue === box ? 'scale-box-selected btn' : 'scale-box btn'" (click)="setScaleValue(box,i)">
+                          {{box}}
+                        </button>
+                      </ng-container>
                     </div>
                   </div>
                 </div>

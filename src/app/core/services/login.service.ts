@@ -1,9 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, map } from 'rxjs';
+import { BehaviorSubject, map } from 'rxjs';
 import { LoginModel, SignUpModel } from 'src/app/public/models/login';
-import { AuthService } from '../auth/auth.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -24,11 +23,7 @@ export class LoginService {
     }));
   }
   signUp(loginDetails: SignUpModel){
-    return this.http.post(`${this.apiUrl}/auth/register`,loginDetails).pipe(map((res) => {
-      this.setLocalData("authData",JSON.stringify(res));
-      this.setUsetAuthDetails(this.getLocalData("authData"));
-      return res;
-    }));;
+    return this.http.post(`${this.apiUrl}/auth/register`,loginDetails);
   }
   logOut(id: string,email : string){
     let equestObj = {

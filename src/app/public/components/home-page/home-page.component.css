@@ -154,3 +154,11 @@
 .navigate-contributor{
   transform: scale(1.5);
 }
+.trending-loader{
+  border-radius: 20px;
+  background-color: #c10000db;
+}
+.trending-spinner{
+  top: 35% !important;
+    left: 45% !important;
+}

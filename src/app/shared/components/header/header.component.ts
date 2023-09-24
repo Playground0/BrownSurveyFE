@@ -26,7 +26,6 @@ export class HeaderComponent implements OnInit {
         }
         else{
           this.checkAndSetLoggedInUserName(this.loginService.getLocalData("authData"));
-          this.loginService.setUsetAuthDetails(this.loginService.getLocalData("authData"));
         }
       }
     });
