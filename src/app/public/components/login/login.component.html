@@ -1,1 +1,49 @@
-<p>login works!</p>
+<div class="container">
+    <div class="rounded-box shadow-lg">
+        <div class="login-with-links">
+            <h1>You can use below accounts to,</h1>
+            <div class="btn-google">
+                <button class="btn">{{currentPageTitle}} with Google</button>
+            </div>
+            <div class="btn-facebook">
+                <button class="btn">{{currentPageTitle}} with Facebook</button>
+            </div>
+            <div class="btn-twitter">
+                <button class="btn">{{currentPageTitle}} with Twitter</button>
+            </div>
+        </div>
+        <div class="vertical-line"></div>
+        <div class="login-form">
+            <form [formGroup]="loginForm">
+                <h1>{{currentPageTitle}}</h1>
+                <mat-form-field appearance="outline">
+                    <mat-label>Email</mat-label>
+                    <input formControlName="email" type="text" matInput placeholder="Enter Email ID" />
+                </mat-form-field>
+                <mat-form-field appearance="outline" *ngIf="toggleLoginPage">
+                    <mat-label>User Name</mat-label>
+                    <input formControlName="username" type="text" matInput placeholder="Enter Email ID" />
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Password</mat-label>
+                    <input formControlName="password" type="password" matInput placeholder="Password" />
+                </mat-form-field>
+                <mat-form-field appearance="outline" *ngIf="toggleLoginPage">
+                    <mat-label>Confirm Password</mat-label>
+                    <input formControlName="confirmpassword" type="password" matInput placeholder="Confirm Password" />
+                </mat-form-field>
+                <div class="login-error mt-0 mb-3">
+                    <mat-error>{{loginErrMsg}}</mat-error>
+                </div>
+                <div class="login-btn-area">
+                    <button *ngIf="!toggleLoginPage" class="btn" (click)="onLogin()">Login</button>
+                    <button *ngIf="toggleLoginPage" class="btn" (click)="onSignUp()">Sign Up</button>
+                </div>
+                <div class="sign-up-link">
+                    <button *ngIf="!toggleLoginPage" class="btn" (click)="toggleSignUpAndLogin()">Not a member, Sign Up here</button>
+                    <button *ngIf="toggleLoginPage" class="btn" (click)="toggleSignUpAndLogin()">Signed Up, Go to login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

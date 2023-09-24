@@ -1,7 +1,7 @@
 <div class="container">
 
   <!-- start list of form -->
-  <div class="rounded-box info-box">
+  <div class="rounded-box info-box shadow-lg">
     <div class="row mt-2">
       <div class="col"></div>
       <div class="col-md-8">
@@ -19,7 +19,7 @@
     <div class="row">
       <div class="col">
         <app-form-list [list$]="listOfSurvey$">
-          <div class="header" >
+          <div class="header">
             <span>Surveys Created: {{surveyListLength}}</span>
           </div>
           <button class="btn" (click)="createForm('survey')">Create Survey</button>
@@ -35,8 +35,8 @@
       </div>
       <div class="col">
         <app-form-list [list$]="listOfOpinions$">
-          <div class="header" >
-             <span>Opinions Created: {{opinionListLength}}</span>
+          <div class="header">
+            <span>Opinions Created: {{opinionListLength}}</span>
           </div>
           <button class="btn" (click)="createForm('opinion')">Create Opinion</button>
         </app-form-list>
@@ -46,28 +46,30 @@
   <!-- end list of form -->
 
   <!-- start top-trending-form -->
-  <div class="rounded-box background-image">
-    <div *ngIf="(trendingForm$| async) as form;" class="d-flex justify-content-between">
-      <div >
+  <div class="rounded-box background-image shadow">
+    <div *ngIf="(trendingForm$| async) as form;" class="d-flex justify-content-between ">
+      <div *ngIf="!form" class="loader">
+        <div class="spinner trending-loader">
+          <mat-spinner></mat-spinner>
+        </div>
+      </div>
+      <div *ngIf="form">
         <div class="top-trending-form">
           <span class="top-trending-form-title">Top Trending Form</span>
-          <span class="top-trending-form-list">Form Name: <span class="badge custom-badge">{{form.formTitle}}</span> </span>
+          <span class="top-trending-form-list">Form Name: <span class="badge custom-badge">{{form.formTitle}}</span>
+          </span>
           <span class="top-trending-form-list">Type: <span class="badge custom-badge">{{form.formType}}</span></span>
           <span class="top-trending-form-list">Popularity</span>
-          <span class="top-trending-form-list">Created By: <span class="badge custom-badge">{{form.createdBy}}</span></span>
+          <span class="top-trending-form-list">Created By: <span
+              class="badge custom-badge">{{form.createdBy}}</span></span>
         </div>
       </div>
       <div class="next-btn">
         <button class="btn" (click)="showTrending(form)">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            height="1.54em"
-            viewBox="0 0 448 512"
-          >
+          <svg xmlns="http://www.w3.org/2000/svg" height="1.54em" viewBox="0 0 448 512">
             <!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
             <path
-              d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"
-            />
+              d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z" />
           </svg>
         </button>
       </div>
@@ -76,44 +78,46 @@
   <!-- end top-trending-form -->
 
   <!-- start contributors -->
-  <div class="rounded-box primary-color" *ngIf="(contributorsList$| async) as contributor;">
-    <div class="contributor-text" >
-      <h1>Contributors</h1>
+  <div class="rounded-box primary-color shadow-lg" *ngIf="(contributorsList$| async) as contributor;">
+    <div *ngIf="!contributor" class="loader trending-loader">
+      <div class="spinner trending-spinner">
+        <mat-spinner></mat-spinner>
+      </div>
     </div>
-    <div class="profile">
-      <mat-icon>account_circle</mat-icon>
-    </div>
-    <div class="contributor-info">
-      <span class="contributor-name">{{contributor[currContributor].cont_name}}</span>
-      <p class="contributo-desc">
-        {{contributor[currContributor].cont_desc}}
-      </p>
-    </div>
-    <div class="next-contributor">
-      <button [disabled]="currContributor === 0" class="btn" (click)="prevContributor()">
-        <mat-icon>chevron_left</mat-icon>
-      </button>
-      <button [disabled]="contributor.length - 1 === currContributor" class="btn" (click)="nextContributor()">
-        <mat-icon>chevron_right</mat-icon>
-      </button>
-    </div>
+    <ng-container *ngIf="contributor">
+      <div class="contributor-text">
+        <h1>Contributors</h1>
+      </div>
+      <div class="profile">
+        <mat-icon>account_circle</mat-icon>
+      </div>
+      <div class="contributor-info">
+        <span class="contributor-name">{{contributor[currContributor].cont_name}}</span>
+        <p class="contributo-desc">
+          {{contributor[currContributor].cont_desc}}
+        </p>
+      </div>
+      <div class="next-contributor">
+        <button [disabled]="currContributor === 0" class="btn" (click)="prevContributor()">
+          <mat-icon class="navigate-contributor">chevron_left</mat-icon>
+        </button>
+        <button [disabled]="contributor.length - 1 === currContributor" class="btn" (click)="nextContributor()">
+          <mat-icon class="navigate-contributor">chevron_right</mat-icon>
+        </button>
+      </div>
+    </ng-container>
   </div>
   <!-- end contributors -->
 
   <div class="donate">
-    <button class="btn"> <span>Like what you see, Please donate a coffee to the dev team!</span> </button>
+    <button class="btn shadow-lg"> <span>Like what you see, Please donate a coffee to the dev team!</span> </button>
   </div>
   <div class="donate mb-3">
-    <button class="btn">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        height="1em"
-        viewBox="0 0 640 512"
-      >
+    <button class="btn shadow">
+      <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 640 512">
         <!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
         <path
-          d="M96 64c0-17.7 14.3-32 32-32H448h64c70.7 0 128 57.3 128 128s-57.3 128-128 128H480c0 53-43 96-96 96H192c-53 0-96-43-96-96V64zM480 224h32c35.3 0 64-28.7 64-64s-28.7-64-64-64H480V224zM32 416H544c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32z"
-        />
+          d="M96 64c0-17.7 14.3-32 32-32H448h64c70.7 0 128 57.3 128 128s-57.3 128-128 128H480c0 53-43 96-96 96H192c-53 0-96-43-96-96V64zM480 224h32c35.3 0 64-28.7 64-64s-28.7-64-64-64H480V224zM32 416H544c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32z" />
       </svg>
     </button>
   </div>

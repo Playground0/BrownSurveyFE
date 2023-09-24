@@ -23,6 +23,7 @@ export class ViewFormComponent implements OnInit {
   @Input() dataFromDialog!: Form;
   AdminConstants = AdminConstants;
   scaleBox : number[] = [1,2,3,4,5,6,7,8,9,10];
+  selectedScaleValue: number = 0;
   constructor(private activatedRoute:ActivatedRoute, private apiService : PublicApiService, private fb: FormBuilder, private datePipe: DatePipe) 
   {}
 
@@ -78,11 +79,12 @@ export class ViewFormComponent implements OnInit {
     })
   }
   loadData(data: Form, isPreview: boolean){
-    this.formDetails = data;
-    this.questions = this.formDetails.formQuestions;
-    this.setFormArray(this.questions); 
-    this.formloader= false;
-    this.preview = isPreview;
+      this.formDetails = data;
+      this.questions = this.formDetails.formQuestions;
+      this.setFormArray(this.questions); 
+      this.formloader= false;
+      this.formSubmited = false;
+      this.preview = isPreview; 
   }
   setFormArray(questions: FormQuestions[]){
     questions.forEach((e,i) => {
@@ -99,6 +101,7 @@ export class ViewFormComponent implements OnInit {
   }
   setScaleValue(value:number,index:number){
     this.questionResponse.at(index).get('answer1')?.setValue(value.toString());
+    this.selectedScaleValue = value;
   }
   submitResponse(){
     if(this.responseForm.invalid){
