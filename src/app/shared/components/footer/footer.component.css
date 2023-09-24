@@ -1,10 +1,13 @@
 .footer{
     background-color: #EEEEEE;
-    padding: 2rem;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
     font-size: 24px;
 }
 .body{
     color: #595260;
     display: flex;
     justify-content: center;
+    align-items: center;
+    margin-top: -20px;
 }

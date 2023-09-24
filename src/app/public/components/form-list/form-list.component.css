@@ -31,3 +31,10 @@
 .custom-badge{
   float: right;
 }
+.spinner{
+  top: 40% !important;
+  left: 40% !important;
+}
+.loader{
+  border-radius: 20px;
+}

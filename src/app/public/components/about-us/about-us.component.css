@@ -1,0 +1,73 @@
+@import url(../../../shared/styles/globalstyles.css);
+
+.about-us-main-box{
+    display: flex;
+    width: 100%;
+    /* height: auto; */
+    position: relative;
+}
+.about-us-left-box{
+    width: 50%;
+    border-radius: 20px 0px 20px 0px;
+    background-color: #c10000;
+    position: absolute;
+    left: 7%;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+}
+.about-us-right-box{
+    width: 39%;
+    border-radius: 0px 20px 20px 0px;
+    background-color: #eeeeee;
+    padding: 18%;
+    position: absolute;
+    right: 98px;
+    display: flex;
+    justify-content: center;
+    padding: 7.3rem;
+    height: 50vh;
+}
+.about-us-main-box h1{
+    font-size: 112px;
+    color: #eeeeee;
+}
+
+.our-story-main-box{
+    display: flex;
+    width: 100%;
+    /* height: auto; */
+    position: relative;
+}
+.our-story-left-box{
+    width: 50%;
+    border-radius: 20px 0px 20px 0px;
+    background-color: #eeeeee;
+    position: absolute;
+    left: 7%;
+    top: 550px;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30vh;
+}
+.our-story-right-box{
+    width: 39%;
+    border-radius: 0px 20px 20px 0px;
+    background-color: #c10000;
+    padding: 18%;
+    position: absolute;
+    right: 98px;
+    top: 550px;
+    display: flex;
+    justify-content: center;
+    padding: 7.3rem;
+    height: 30vh;
+}
+.our-story-main-box h1{
+    font-size: 48px;
+    color: #c10000;
+}

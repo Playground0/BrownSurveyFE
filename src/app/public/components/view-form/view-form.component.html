@@ -1,5 +1,5 @@
 <div class="container">
-  <div *ngIf="formloader && formSubmited" class="loader">
+  <div *ngIf="formloader && !formSubmited" class="loader">
     <div class="spinner">
       <mat-spinner></mat-spinner>
     </div>
@@ -12,7 +12,7 @@
       <div class="row">
         <div class="col-md-3">
           <div class="basic-info">
-            Form Created By: {{formDetails? formDetails.userName : ""}}
+            Form Created By: {{formDetails?.userName !== "0" ? formDetails?.userName : "Anonymous"}}
           </div>
         </div>
         <div class="col-md-6">
@@ -25,14 +25,14 @@
         </div>
       </div>
     </div>
-    <div class="bottom-part">
+    <div class="bottom-part shadow">
       <!-- <div *ngFor="let question of questions" class="rounded-box"> -->
       <!-- <div class="form-area"> -->
       <form [formGroup]="responseForm">
         <div class="answer-area">
           <div formArrayName="questionResponse">
             <div *ngFor="let form of questionResponse.controls; let i=index">
-              <div class="rounded-box">
+              <div class="rounded-box shadow">
                 <div [formGroupName]="i">
                   <div class="question-details">
                     <div><span>{{form.value?.question}}</span> </div>
@@ -41,7 +41,7 @@
                           Later</a></span>
                     </div>
                   </div>
-                  <div class="answer-details">
+                  <div class="answer-details shadow">
                     <div *ngIf="form.value.type === AdminConstants.Percentage">
                       <mat-slider min="0" max="100000" step="1000" showTickMarks discrete [displayWith]="formatLabel">
                         <input matSliderThumb formControlName="answer1">
@@ -114,9 +114,11 @@
                         [value]="questions[i].options?.option4">{{questions[i].options?.option4}}</mat-radio-button>
                     </mat-radio-group>
                     <div *ngIf="form.value.type === AdminConstants.Scale">
-                      <button class="scale-box btn" *ngFor="let box of scaleBox" (click)="setScaleValue(box,i)">
-                        {{box}}
-                      </button>
+                      <ng-container >
+                        <button *ngFor="let box of scaleBox" [ngClass]="selectedScaleValue === box ? 'scale-box-selected btn' : 'scale-box btn'" (click)="setScaleValue(box,i)">
+                          {{box}}
+                        </button>
+                      </ng-container>
                     </div>
                   </div>
                 </div>

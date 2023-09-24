@@ -8,8 +8,6 @@ import { Component, OnInit } from '@angular/core';
 
 
 export class AppComponent implements OnInit {
-  //First changes to dev branch
-  
   title = 'Brownsurvey';
 
   constructor()

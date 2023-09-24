@@ -1,6 +1,6 @@
 .header {
   margin-top: 2%;
-  margin-bottom: 2%;
+  margin-bottom: 1%;
 }
 .title {
   display: flex;
@@ -50,4 +50,61 @@
 }
 .line {
   border: 1px solid #ffffff;
+  margin-bottom: 0px;
+}
+.profile-btn{
+  color: #c10000;
+}
+.account-icon{
+  float: left;
+  color: #c10000;
+}
+.form-btn{
+  display: flex;
+  justify-content: center;
+}
+.profile-btn{
+  display: flex;
+  justify-content: center;
+}
+.account-circle{
+  transform: scale(2);
+}
+.account-circle:hover{
+  color: grey;
+  transition: all 0.3s ease;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+}
+.login-text{
+  padding: 10px;
+  border-bottom: 1px solid #c10000;
+}
+.profile-icons:hover{
+  color: grey;
+  transition: all 0.3s ease;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+}
+.wrapper {
+  top: 8%;
+  left: 12.5%;
+  transform: translate(-50%, -50%);
+  position: fixed;
+}
+
+.circle {
+  border-radius: 50%;
+  text-align: center;
+  vertical-align: middle;
+  display: table-cell;
+}
+
+#reload {
+  width: 50px;
+  height: 50px;
 }

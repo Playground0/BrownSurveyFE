@@ -20,20 +20,37 @@
       <button class="btn" [matMenuTriggerFor]="menu">Create</button>
       <button class="btn" (click)="goToPlans()">Subscribe</button>
       <button class="btn" (click)="goToAboutUs()">About Us</button>
-      <button class="btn" (click)="goToLogin()">Login</button>
+      <button class="btn" *ngIf="!loggedIn" (click)="goToLogin()">Login</button>
+      <button class="btn account-circle-btn" [matMenuTriggerFor]="profileMenu" *ngIf="loggedIn">
+        <span><mat-icon class="account-icon account-circle" >account_circle</mat-icon></span></button>
     </div>
   </div>
 </div>
 <hr class="container line" />
 
 <mat-menu #menu="matMenu">
-  <button mat-menu-item (click)="goToCreate('survey')">
+  <button class="form-btn" mat-menu-item (click)="goToCreate('survey')">
     <span>Survey</span>
   </button>
-  <button mat-menu-item (click)="goToCreate('quiz')">
+  <button class="form-btn" mat-menu-item (click)="goToCreate('quiz')">
     <span>Quiz</span>
   </button>
-  <button mat-menu-item (click)="goToCreate('opinion')">
+  <button class="form-btn" mat-menu-item (click)="goToCreate('opinion')">
     <span>Opinion</span>
+  </button>
+</mat-menu>
+
+<mat-menu #profileMenu="matMenu">
+  <div class="profile-btn login-text">
+    <span>Hi, {{loginText}}</span>
+  </div>
+  <button class="profile-btn"  mat-menu-item (click)="goToProfile('')">
+    <span> Profile <mat-icon class="account-icon profile-icons"> local_library</mat-icon></span>
+  </button>
+  <button class="profile-btn"  mat-menu-item (click)="goToProfile('Need Support')">
+    <span>Support<mat-icon class="account-icon profile-icons">contact_support</mat-icon></span>
+  </button>
+  <button class="profile-btn"  mat-menu-item (click)="logout()">
+    <span>Log Out  <mat-icon aria-hidden="false " class="account-icon profile-icons">logout</mat-icon></span>
   </button>
 </mat-menu>

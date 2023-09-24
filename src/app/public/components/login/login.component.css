@@ -1,0 +1,125 @@
+@import url(../../../shared/styles/globalstyles.css);
+
+.rounded-box{
+    background-color: #EEEEEE;
+    /* border: 1px solid #C10000; */
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    height: auto;
+    margin-top: 3%;
+    /* box-shadow: 0px 3px 21px 10px #c10000; */
+}
+.login-with-links{
+    margin: 1rem;
+    margin-top: 2rem;
+    margin-bottom: 4rem;
+}
+.login-with-links .btn{
+    /* display: block; */
+    margin: 0.5rem;
+    display: block;
+    width: 100%;
+    color: #595260;
+}
+.login-with-links h1{
+    font-size: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2rem;
+}
+.btn-google .btn{
+    background-color: #DB4437;
+    color: white;
+}
+.btn-google .btn:hover{
+    border: 1px solid #DB4437;
+    background-color: #EEEEEE;
+    color: #DB4437;
+}
+.btn-facebook .btn{
+    background-color: #4267B2;
+    color: white;
+}
+.btn-facebook .btn:hover{
+    border: 1px solid #4267B2;
+    background-color: #EEEEEE;
+    color: #4267B2;
+}
+.btn-twitter .btn{
+    background-color: #1DA1F2;
+    color: white;
+}
+.btn-twitter .btn:hover{
+    border: 1px solid #1DA1F2;
+    background-color: #EEEEEE;
+    color: #1DA1F2;
+}
+.login-form{
+    margin-left: 2rem;
+    margin-top: 5rem;
+    margin-bottom: 2rem;
+    width: 25%;
+}
+.login-form h1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 60px;
+    margin-bottom: 4rem;
+    color: #595260;
+}
+.login-form .btn{
+    background-color: #c10000;
+    color: #eeeeee;
+    box-shadow: none !important;
+    border: none;
+    width: 50%;
+}
+.login-form .btn:hover{
+    background-color: #c10000a9;
+    border: none;
+}
+.login-form .btn:focus {
+    border: none;
+    color: #eeeeee;
+  }
+  .login-btn-area{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .vertical-line{
+    border: 2px solid #dedede;;
+    height: 15rem;
+    border-radius: 20px;
+  }
+  .sign-up-link{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .sign-up-link .btn{
+    margin-top: 0.5rem;
+    background-color: #EEEEEE;
+    color: #595260;
+  }
+  .sign-up-link .btn{
+    background-color: #EEEEEE;
+    color: #595260;
+    box-shadow: none !important;
+    border: none;
+    width: 50%;
+  }
+  .sign-up-link .btn:hover{
+    background-color: #EEEEEE;
+    text-decoration: underline;
+    border: none;
+    color:#C10000;
+}
+.login-error{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
