@@ -42,7 +42,7 @@ export class ViewFormComponent implements OnInit {
       questionResponse : new FormArray([]),
       asAnnonymous: new FormControl(false,Validators.required),
       name:new FormControl('',Validators.required),
-      email:new FormControl('',Validators.required),
+      email:new FormControl('',[Validators.required,Validators.email]),
       age:new FormControl('',Validators.required),
       location:new FormControl('',Validators.required)
     });

@@ -16,19 +16,24 @@ export class LoginComponent implements OnInit {
   loginErrMsg : string = "";
   currentPageTitle: string = "Login";
   toggleLoginPage: boolean = false;
+  showPassword: boolean = false;
+  showConfirmPassword: boolean = false;
   constructor(private fb:FormBuilder, private loginService: LoginService,private router: Router){}
   ngOnInit(): void {
     this.loginForm = this.initializeForm();
   }
   initializeForm(){
     return this.fb.group({
-      email: new FormControl('',Validators.required),
+      email: new FormControl('',[Validators.required, Validators.email]),
       password: new FormControl('',Validators.required),
       username: new FormControl(''),
       confirmpassword: new FormControl('')
     });
   }
   onLogin(){
+    if(this.loginForm.invalid){
+      return;
+    }
     let loginValue : LoginModel = this.loginForm.value;
     this.loginErrMsg = "";
     this.loginService.login(loginValue).subscribe({
@@ -41,6 +46,9 @@ export class LoginComponent implements OnInit {
     });
   }
   onSignUp(){
+    if(this.loginForm.invalid){
+      return;
+    }
     let loginValue : SignUpModel = this.loginForm.value;
     if(loginValue.password !== this.loginForm.value.confirmpassword){
       this.loginErrMsg = "Password do not match";
@@ -83,5 +91,8 @@ export class LoginComponent implements OnInit {
       this.loginForm.updateValueAndValidity();
     }
     return;
+  }
+  togglePasswordVisibility(confirmPassword : boolean): void {
+    confirmPassword ? this.showConfirmPassword = !this.showConfirmPassword : this.showPassword = !this.showPassword;
   }
 }

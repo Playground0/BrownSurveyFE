@@ -18,7 +18,7 @@
                 <h1>{{currentPageTitle}}</h1>
                 <mat-form-field appearance="outline">
                     <mat-label>Email</mat-label>
-                    <input formControlName="email" type="text" matInput placeholder="Enter Email ID" />
+                    <input formControlName="email" type="text" matInput placeholder="Enter Email ID"  email="true"/>
                 </mat-form-field>
                 <mat-form-field appearance="outline" *ngIf="toggleLoginPage">
                     <mat-label>User Name</mat-label>
@@ -26,11 +26,13 @@
                 </mat-form-field>
                 <mat-form-field appearance="outline">
                     <mat-label>Password</mat-label>
-                    <input formControlName="password" type="password" matInput placeholder="Password" />
+                    <input formControlName="password" [type]="showPassword ? 'text' : 'password'"  matInput placeholder="Password" />
+                    <mat-icon class="hide-show-btn" matSuffix (click)="togglePasswordVisibility(false)">{{showPassword?'visibility_off':'visibility'}}</mat-icon>
                 </mat-form-field>
                 <mat-form-field appearance="outline" *ngIf="toggleLoginPage">
                     <mat-label>Confirm Password</mat-label>
-                    <input formControlName="confirmpassword" type="password" matInput placeholder="Confirm Password" />
+                    <input formControlName="confirmpassword" [type]="showConfirmPassword ? 'text' : 'password'"  matInput placeholder="Confirm Password" />
+                    <mat-icon class="hide-show-btn" matSuffix (click)="togglePasswordVisibility(true)">{{showConfirmPassword?'visibility_off':'visibility'}}</mat-icon>
                 </mat-form-field>
                 <div class="login-error mt-0 mb-3">
                     <mat-error>{{loginErrMsg}}</mat-error>

@@ -15,7 +15,7 @@
       <div class="col-md-8">
         <mat-form-field class="form-name" appearance="outline">
           <mat-label>{{ formType }} Title</mat-label>
-          <input formControlName="title" type="text" (keyup)="onChangeTitle()" matInput placeholder="Title goes like..." />
+          <input (keypress)="omit_special_char($event)" formControlName="title" type="text" (keyup)="onChangeTitle()" matInput placeholder="Title goes like..." />
         </mat-form-field>
       </div>
       <div class="col-md-2 form-authenticity">
@@ -36,7 +36,7 @@
                 <div class="col-md-9">
                     <mat-form-field appearance="outline">
                       <mat-label>Question</mat-label>
-                        <input type="text" formControlName="question" matInput placeholder="Question goes like..." />
+                        <input (keypress)="omit_special_char($event)" type="text" formControlName="question" matInput placeholder="Question goes like..." />
                       </mat-form-field>
                 </div>
                 <div class="col-md-3">
@@ -111,7 +111,7 @@
     <div class="buttons">
       <div>
         <div *ngIf="formType !== 'Opinion'">
-          <button  class="btn" [disabled]="forms.controls.length === formLimit" (click)="addForm()">Add Form</button>
+          <button  class="btn" [disabled]="forms.controls.length === formLimit" (click)="addForm()">+ Add</button>
         </div>
       </div>
       <div>
