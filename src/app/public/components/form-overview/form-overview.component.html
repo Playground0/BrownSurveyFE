@@ -19,15 +19,13 @@
             <mat-select formControlName="status" placeholder="Set Status">
               <mat-option>Clear</mat-option>
               <mat-option [value]="status.name" *ngFor="let status of statusDropDown$ | async">{{status.name}}</mat-option>
-              <!-- <mat-option>Private</mat-option>
-              <mat-option>Draft</mat-option> -->
             </mat-select>
           </mat-form-field>
         </div>
         <div>
           <mat-form-field appearance="outline">
             <mat-label>Email</mat-label>
-            <input type="text" matInput placeholder="Enter Email ID" formControlName="email" />
+            <input type="text" matInput placeholder="Enter Email ID" formControlName="email" email="true" />
           </mat-form-field>
         </div>
       </div>

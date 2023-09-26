@@ -26,7 +26,7 @@ export class FormOverviewComponent implements OnInit{
   initializeForm() : FormGroup{
     return this.fb.group({
       status: new FormControl('',Validators.required),
-      email: new FormControl(''),
+      email: new FormControl('',Validators.email),
       recieveUpdates: new FormControl(''),
       targetAudience: new FormControl('')
     });
