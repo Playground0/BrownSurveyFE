@@ -26,7 +26,7 @@
     color: #c10000;
     border: none;
   }
-.btn:focus {
+  .btn-selected {
     border: none;
     color: #c10000;
   }

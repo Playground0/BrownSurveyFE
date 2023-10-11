@@ -44,8 +44,12 @@
   border: none;
   background: none;
 }
-.btn:hover,
-.btn:focus {
+.selected-btn{
+  color: #c10000;
+  border: none;
+}
+.btn:hover
+{
   color: #c10000;
 }
 .line {

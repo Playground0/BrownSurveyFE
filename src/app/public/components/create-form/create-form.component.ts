@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PublicCommonService } from '../../services/public-common.service';
-import {AbstractControl, FormArray,FormBuilder,FormControl,FormGroup,Validators,} from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators, } from '@angular/forms';
 import { PublicApiService } from '../../services/public-api.service';
 import { TitleAuthentication } from '../../models/AuthticationResponse.model';
-import {CustomForm,FormQuestions,QuestionOptions} from '../../models/UIModels/CustomForm.model';
+import { CustomForm, FormQuestions, QuestionOptions } from '../../models/UIModels/CustomForm.model';
 import { Form } from '../../models/saveForm.model';
 import { DatePipe } from '@angular/common';
 import { Observable } from 'rxjs';
@@ -13,6 +13,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { FormOverviewComponent } from '../form-overview/form-overview.component';
 import * as AdminConstants from '../../../shared/Constants/AdminConfiguration.constants';
 import * as FormConstants from '../../../shared/Constants/Form.constants'
+import { LoginService } from 'src/app/core/services/login.service';
 @Component({
   selector: 'app-create-form',
   templateUrl: './create-form.component.html',
@@ -20,6 +21,7 @@ import * as FormConstants from '../../../shared/Constants/Form.constants'
 })
 export class CreateFormComponent implements OnInit {
   formType: string = '';
+  formId: string = '';
   customForm!: FormGroup;
   formLimit: number = 0;
   isTitleAMatch: boolean = false;
@@ -28,7 +30,7 @@ export class CreateFormComponent implements OnInit {
   listOfCategories$!: Observable<AdminConfiguration[]>;
   listOfQuestionTypes!: AdminConfiguration[];
   AdminConstants = AdminConstants;
-
+  userId: string = "0";
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
@@ -36,11 +38,16 @@ export class CreateFormComponent implements OnInit {
     private fb: FormBuilder,
     private publicApiService: PublicApiService,
     private datePipe: DatePipe,
-    public dialog: MatDialog
-  ) {}
+    public dialog: MatDialog,
+    public loginService: LoginService
+  ) { }
 
   ngOnInit(): void {
+    this.userId = this.loginService.getUserID("authData");
     this.getFormTypeFromUrl();
+    if(this.formId){
+      this.getFormDetails(this.formId)
+    }
     this.getFormCategories();
   }
   initializeForm(): FormGroup {
@@ -79,9 +86,10 @@ export class CreateFormComponent implements OnInit {
       this.customForm = this.initializeForm();
       this.onChangeTitle();
       this.addForm();
-      let urlKey = param['formType'];
-      this.formType = this.publicCommonService.getFormKey(urlKey);
-      this.formLimit = this.publicCommonService.getFormLimit(urlKey);
+      let urlKey : string = param['formType'];
+      this.formId = param['formId'];
+      this.formType = this.publicCommonService.getFormKey(urlKey.toLocaleLowerCase());
+      this.formLimit = this.userId !== '0' ? this.publicCommonService.getFormLimit(urlKey,true) : this.publicCommonService.getFormLimit(urlKey);
       this.getQuestionTypes();
     });
   }
@@ -114,28 +122,35 @@ export class CreateFormComponent implements OnInit {
     let formValue: CustomForm = this.customForm.value;
     let currentDate: Date = new Date(Date.now());
     let submitForm: Form = {
-      userID: '0',
-      userName: '0',
+      userID: this.loginService.getUserID("authData"),
+      userName: this.loginService.getUserName("authData"),
       formTitle: formValue.title.trim(),
       formType: this.formType,
       formCategory: formValue.category,
       formStatus: 'true',
       formStage: 'Live',
       formCreationDate: this.datePipe.transform(currentDate, 'MM/dd/yyyy'),
-      formExpirydate: this.datePipe.transform(currentDate.setDate(currentDate.getDate() + 7),'MM/dd/yyyy'),
+      formExpirydate: this.datePipe.transform(currentDate.setDate(currentDate.getDate() + 7), 'MM/dd/yyyy'),
       formQuestions: this.mapFormQuestions(formValue.forms),
     };
-    this.openDialog(submitForm);
+    if(this.formId){
+      submitForm.Id = this.formId;
+      this.openDialog(submitForm,true);
+      return;
+    }
+    this.openDialog(submitForm,false);
   }
-  openDialog(submitForm : Form){
-    const dialogRef = this.dialog.open(FormOverviewComponent,{
-      data: {formData:submitForm},
-      height:'80%',
-      width:'75%'
+  openDialog(submitForm: Form, isDraft:boolean) {
+    const dialogRef = this.dialog.open(FormOverviewComponent, {
+      data: { formData: submitForm, isDraft: isDraft },
+      height: '80%',
+      width: '75%'
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if(result)this.router.navigateByUrl(`/view-form/${result.id}`)
+      if (result.id) {
+        this.router.navigateByUrl(`/view-form/${result.id}`)
+      }
     });
     return;
   }
@@ -146,76 +161,80 @@ export class CreateFormComponent implements OnInit {
     );
   }
   getQuestionTypes() {
-    this.publicApiService.getAdminConfigurations(this.formType,AdminConstants.QuestionTypes).subscribe({
-      next : (res: AdminConfiguration[]) => {
+    this.publicApiService.getAdminConfigurations(this.formType, AdminConstants.QuestionTypes).subscribe({
+      next: (res: AdminConfiguration[]) => {
         this.listOfQuestionTypes = res;
       }
     });
   }
   checkSelectValue(value: string, index: number) {
-    if (value === AdminConstants.TextField ||value === AdminConstants.Percentage ||
+    if (value === AdminConstants.TextField || value === AdminConstants.Percentage ||
       value === AdminConstants.Scale || value === AdminConstants.YesNo || value == ''
     ) {
       this.removeValidatorsForOptions(this.forms.at(index));
-      this.toggleOptions(this.forms.at(index),false);
+      this.toggleOptions(this.forms.at(index), false);
       return;
     }
-    if(this.formType === FormConstants.Quiz){
-      this.addFunctionalityForQuiz(this.forms.at(index),value);
+    if (this.formType === FormConstants.Quiz) {
+      this.addFunctionalityForQuiz(this.forms.at(index), value);
       return;
     }
     this.checkAndValidatorsForOptions(this.forms.at(index));
-    this.toggleOptions(this.forms.at(index),true);
+    this.toggleOptions(this.forms.at(index), true);
     return;
   }
-  toggleOptions(form : AbstractControl, toggleValue : boolean){
+  toggleOptions(form: AbstractControl, toggleValue: boolean) {
     form.get('showOption')?.setValue(toggleValue);
     form.get('options')?.reset();
   }
-  addFunctionalityForQuiz(form:AbstractControl, value : string){
-    if(value === AdminConstants.MultipleChoiceSingle){
+  addFunctionalityForQuiz(form: AbstractControl, value: string) {
+    if (value === AdminConstants.MultipleChoiceSingle) {
       form.get('answer1')?.addValidators(Validators.required);
-    }else{
+    } else {
       form.get('answer1')?.addValidators(Validators.required);
       form.get('answer2')?.addValidators(Validators.required);
     }
     form.updateValueAndValidity();
-    this.toggleOptions(form,true);
+    this.toggleOptions(form, true);
   }
   optionFormGroup(): FormGroup {
     return this.fb.group({
-      option1: new FormControl('',Validators.required),
-      option2: new FormControl('',Validators.required),
-      option3: new FormControl('',Validators.required),
-      option4: new FormControl('',Validators.required),
+      option1: new FormControl('', Validators.required),
+      option2: new FormControl('', Validators.required),
+      option3: new FormControl('', Validators.required),
+      option4: new FormControl('', Validators.required),
       answer1: new FormControl(''),
       answer2: new FormControl('')
     });
   }
-  removeValidatorsForOptions(form: AbstractControl){
+  removeValidatorsForOptions(form: AbstractControl) {
     form.get('options')?.get('option1')?.removeValidators(Validators.required);
+    form.get('options')?.get('option1')?.updateValueAndValidity();
     form.get('options')?.get('option2')?.removeValidators(Validators.required);
+    form.get('options')?.get('option2')?.updateValueAndValidity();
     form.get('options')?.get('option3')?.removeValidators(Validators.required);
+    form.get('options')?.get('option3')?.updateValueAndValidity();
     form.get('options')?.get('option4')?.removeValidators(Validators.required);
+    form.get('options')?.get('option4')?.updateValueAndValidity();
     form.updateValueAndValidity();
   }
-  checkAndValidatorsForOptions(form: AbstractControl){
-    if(!form.get('options')?.get('option1')?.hasValidator(Validators.required)){
+  checkAndValidatorsForOptions(form: AbstractControl) {
+    if (!form.get('options')?.get('option1')?.hasValidator(Validators.required)) {
       form.get('options')?.get('option1')?.addValidators(Validators.required);
     }
-    if(!form.get('options')?.get('option2')?.hasValidator(Validators.required)){
+    if (!form.get('options')?.get('option2')?.hasValidator(Validators.required)) {
       form.get('options')?.get('option2')?.addValidators(Validators.required);
     }
-    if(!form.get('options')?.get('option3')?.hasValidator(Validators.required)){
+    if (!form.get('options')?.get('option3')?.hasValidator(Validators.required)) {
       form.get('options')?.get('option3')?.addValidators(Validators.required);
     }
-    if(!form.get('options')?.get('option4')?.hasValidator(Validators.required)){
+    if (!form.get('options')?.get('option4')?.hasValidator(Validators.required)) {
       form.get('options')?.get('option4')?.addValidators(Validators.required);
     }
   }
-  mapFormQuestions(form: FormQuestions[]) : FormQuestions[]{
-    let returnForm : FormQuestions[] = [];
-    returnForm = form.map((ele:FormQuestions) => {
+  mapFormQuestions(form: FormQuestions[]): FormQuestions[] {
+    let returnForm: FormQuestions[] = [];
+    returnForm = form.map((ele: FormQuestions) => {
       return {
         question: ele.question.trim(),
         type: ele.type,
@@ -224,13 +243,45 @@ export class CreateFormComponent implements OnInit {
     })
     return returnForm;
   }
-  checkOptionsForNull(options : QuestionOptions | string) : QuestionOptions | string{
-    return Object.values(options).every((ele) => ele === "" || ele === null ) ? '' : options;
+  checkOptionsForNull(options: QuestionOptions | string): QuestionOptions | string {
+    return Object.values(options).every((ele) => ele === "" || ele === null) ? '' : options;
   }
-  omit_special_char(event:any)
-{   
-   var k;  
-   k = event.charCode;  //         k = event.keyCode;  (Both can be used)
-   return((k > 64 && k < 91) || (k > 96 && k < 123) || k == 8 || k == 32 || (k >= 48 && k <= 57)); 
-}
+  omit_special_char(event: any) {
+    var k;
+    k = event.charCode;  //         k = event.keyCode;  (Both can be used)
+    return ((k > 64 && k < 91) || (k > 96 && k < 123) || k == 8 || k == 32 || (k >= 48 && k <= 57));
+  }
+  getFormDetails(id:string){
+    this.publicApiService.getFormDetails(id).subscribe({
+      next: (res:Form) => {
+        this.assignValuesToForm(res);
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    })
+  }
+  assignValuesToForm(formDetails:Form){
+    this.customForm.get('category')?.setValue(formDetails.formCategory);
+    this.customForm.get('title')?.setValue(formDetails.formTitle);
+    if(formDetails.formQuestions.length){
+      this.forms.removeAt(0);
+      let question = formDetails.formQuestions;
+      this.assisgnQuestionToFormArray(question);
+    }
+  }
+  assisgnQuestionToFormArray(question: FormQuestions[]){
+    question.forEach((e,i) => {
+      this.addForm();
+      this.forms.at(i).get('question')?.setValue(e.question);
+      this.forms.at(i).get('type')?.setValue(e.type);
+      if(e.options){
+        this.forms.at(i).get('options')?.setValue(e.options);
+        this.forms.at(i).get('showOption')?.setValue(true);
+      }
+      else{
+        this.removeValidatorsForOptions(this.forms.at(i));
+      }
+    })
+  }
 }

@@ -49,6 +49,6 @@ import {MatSliderModule} from '@angular/material/slider';
     MatRadioModule,
     MatSliderModule
   ],
-  providers:[DatePipe,{provide:MAT_DIALOG_DATA, useValue:{formData: {}}}]
+  providers:[DatePipe,{provide:MAT_DIALOG_DATA, useValue:{formData: {}, isDraft:false}}]
 })
 export class PublicModule { }

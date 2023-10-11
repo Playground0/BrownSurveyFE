@@ -3,13 +3,13 @@
     <!-- <div class="view"> -->
         <div class="sidenav shadow">
             <div>
-                <button class="btn" routerLink="dashboard">Dashboard</button>
+                <button [ngClass]="currUrl.includes('dashboard') ? 'btn btn-selected' : 'btn'" routerLink="dashboard">Dashboard</button>
             </div>
             <div>
-                <button class="btn"  routerLink="profile-details">User Info</button>
+                <button [ngClass]="currUrl.includes('profile-details') ? 'btn btn-selected' : 'btn'"  routerLink="profile-details">User Info</button>
             </div>
             <div>
-                <button class="btn" routerLink="drafted-forms">Drafted Forms</button>
+                <button [ngClass]="currUrl.includes('drafted-forms') ? 'btn btn-selected' : 'btn'" routerLink="drafted-forms">Drafted Forms</button>
             </div>
             <div>
                 <button class="btn" routerLink="drafted-forms">Change Password</button>

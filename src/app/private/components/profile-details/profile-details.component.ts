@@ -15,6 +15,7 @@ export class ProfileDetailsComponent implements OnInit {
   localData : any;
   userDetailsForm!: FormGroup;
   userID: string = "";
+  dataLoaded: boolean = false;
 
   constructor(private apiSerice: PrivateApiService,private loginService: LoginService, private fb: FormBuilder){}
   ngOnInit(): void {
@@ -45,8 +46,10 @@ export class ProfileDetailsComponent implements OnInit {
     this.userDetailsForm.get('phonenumber')?.setValue(userInfo.phonenumber);
     this.userDetailsForm.get('location')?.setValue(userInfo.location);
     this.userDetailsForm.get('age')?.setValue(userInfo.age);
+    this.dataLoaded = true;
   }
   saveChanges(){
+    this.dataLoaded = false;
     if(this.userDetailsForm.invalid){
       return;
     }
@@ -55,6 +58,10 @@ export class ProfileDetailsComponent implements OnInit {
       next: (res) => {
         console.log(res);
         this.initializeFormWithUserValues();
+        this.dataLoaded = true;
+      },
+      error: (err) => {
+        this.dataLoaded = true;
       }
     });
   }

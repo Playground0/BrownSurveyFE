@@ -10,5 +10,5 @@ export interface SignUpModel{
     location: string,
     age: string,
     password: string,
-
+    userRole: number
 }

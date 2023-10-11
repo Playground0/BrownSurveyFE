@@ -16,11 +16,11 @@
     </div>
     <div class="col-md-3"></div>
     <div class="col-md-6 d-flex justify-content-between">
-      <button class="btn" (click)="gotToHome()">Home</button>
-      <button class="btn" [matMenuTriggerFor]="menu">Create</button>
-      <button class="btn" (click)="goToPlans()">Subscribe</button>
-      <button class="btn" (click)="goToAboutUs()">About Us</button>
-      <button class="btn" *ngIf="!loggedIn" (click)="goToLogin()">Login</button>
+      <button [ngClass]="currUrl === '/' ? 'btn selected-btn' : 'btn'" (click)="gotToHome()">Home</button>
+      <button [ngClass]="currUrl.includes('create') ? 'btn selected-btn' : 'btn'" [matMenuTriggerFor]="menu">Create</button>
+      <button [ngClass]="currUrl.includes('plans') ? 'btn selected-btn' : 'btn'" (click)="goToPlans()">Subscribe</button>
+      <button [ngClass]="currUrl.includes('about-us') ? 'btn selected-btn' : 'btn'" (click)="goToAboutUs()">About Us</button>
+      <button [ngClass]="currUrl.includes('login') ? 'btn selected-btn' : 'btn'" class="btn" *ngIf="!loggedIn" (click)="goToLogin()">Login</button>
       <button class="btn account-circle-btn" [matMenuTriggerFor]="profileMenu" *ngIf="loggedIn">
         <span><mat-icon class="account-icon account-circle" >account_circle</mat-icon></span></button>
     </div>

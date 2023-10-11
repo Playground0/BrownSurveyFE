@@ -6,6 +6,7 @@ import { LoginService } from 'src/app/core/services/login.service';
 import { PrivateApiService } from '../../Services/private-api.service';
 import { MatDialog } from '@angular/material/dialog';
 import { CustomDashboardModalComponent } from '../custom-dashboard-modal/custom-dashboard-modal.componet';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-drafted-forms',
@@ -20,8 +21,10 @@ export class DraftedFormsComponent implements OnInit, AfterViewInit {
   dataSource! : MatTableDataSource<DraftedForm>;
   displayedColumns: string[] = ['formname', 'type', 'startDate','edit', 'delete'];
   userId: string = "";
+  dataLoaded: boolean = false;
+
   constructor(private loginService : LoginService,private apiService: PrivateApiService,
-    public dialog: MatDialog){}
+    public dialog: MatDialog, private router: Router){}
   ngOnInit(): void {
     this.getUserInfo();
     this.loadTableData();
@@ -38,10 +41,13 @@ export class DraftedFormsComponent implements OnInit, AfterViewInit {
   loadTableData(){
     this.apiService.getUserFormDetails(this.userId,"Y").subscribe({
       next: (res: DraftedForm[]) => {
+        this.dataLoaded = true;
         this.ELEMENT_DATA = res;
-        console.log(this.ELEMENT_DATA);
         this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
         this.dataSource.paginator = this.paginator;
+      },
+      error: (err) => {
+        this.dataLoaded = true;
       }
     });
   }
@@ -77,5 +83,8 @@ export class DraftedFormsComponent implements OnInit, AfterViewInit {
       }
     });
     return;
+  }
+  goToEdit(id:string,type:string){
+    this.router.navigateByUrl(`/create/${type}/draft-edit/${id}`);
   }
 }

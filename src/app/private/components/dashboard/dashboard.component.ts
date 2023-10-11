@@ -39,6 +39,7 @@ export class DashboardComponent implements OnInit {
   getTableData() {
     this.apiService.getUserFormDetails(this.userId,"N").subscribe({
       next: (res: DashBoardTableData[]) => {
+        this.dataLoaded = true;
         this.ELEMENT_DATA = res;
         this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
         this.dataSource.paginator = this.paginator;

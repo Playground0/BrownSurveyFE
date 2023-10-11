@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, AfterViewChecked } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { LoginService } from 'src/app/core/services/login.service';
 
 @Component({
@@ -7,16 +7,23 @@ import { LoginService } from 'src/app/core/services/login.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, AfterViewChecked {
 
   
   loginText: string = "Login";
   loggedIn: boolean = false;
-  constructor(private router: Router, private loginService: LoginService){}
+  currUrl: string = "";
+  constructor(private router: Router, private loginService: LoginService,
+    private activatedRoute: ActivatedRoute){}
 
   ngOnInit(){
     this.loggedIn = false;
     this.getUserValue();
+  }
+  ngAfterViewChecked(): void {
+    this.activatedRoute.url.subscribe((url) => {
+      this.currUrl = window.location.pathname;
+    })
   }
   getUserValue(){
     this.loginService.userAuthDetails$.subscribe({

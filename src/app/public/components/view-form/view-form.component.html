@@ -126,31 +126,39 @@
             </div>
           </div>
         </div>
-        <div class="submit-btn-area">
-          <button class="btn" (click)="submitResponse()">Submit Reponse</button>
-        </div>
-        <div class="submit-responses-details">
-          <mat-checkbox (change)="checkResponseAnnonymous()" class="example-margin" formControlName="asAnnonymous">Submit as an
-            Annonymous</mat-checkbox><br><br>
-          <div *ngIf="responseForm.get('asAnnonymous')?.value === false">
-            <mat-form-field appearance="outline">
-              <mat-label>Name</mat-label>
-              <input type="text" formControlName="name" matInput placeholder="eg. John" />
-            </mat-form-field>
-            <mat-form-field appearance="outline">
-              <mat-label>Email</mat-label>
-              <input type="email" formControlName="email" matInput placeholder="eg. something@gmail.com" email="true"/>
-            </mat-form-field>
-            <mat-form-field appearance="outline">
-              <mat-label>Age</mat-label>
-              <input type="text" formControlName="age" matInput placeholder="eg. 40" />
-            </mat-form-field>
-            <mat-form-field appearance="outline">
-              <mat-label>Location</mat-label>
-              <input type="text" formControlName="location" matInput placeholder="eg. Hyderabad" />
-            </mat-form-field>
+        <div *ngIf="currentUserID === '0' || currentUserID !== formCreatorID">
+          <div  class="submit-btn-area">
+            <button class="btn" (click)="submitResponse()">Submit Reponse</button>
+          </div>
+          <div *ngIf="currentUserID === '0' || currentUserID !== formCreatorID" class="submit-responses-details">
+            <mat-checkbox (change)="checkResponseAnnonymous()" class="example-margin" formControlName="asAnnonymous">Submit as an
+              Annonymous</mat-checkbox><br><br>
+            <div *ngIf="responseForm.get('asAnnonymous')?.value === false">
+              <mat-form-field appearance="outline">
+                <mat-label>Name</mat-label>
+                <input type="text" formControlName="name" matInput placeholder="eg. John" />
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Email</mat-label>
+                <input type="email" formControlName="email" matInput placeholder="eg. something@gmail.com" email="true"/>
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Age</mat-label>
+                <input type="text" formControlName="age" matInput placeholder="eg. 40" />
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Location</mat-label>
+                <input type="text" formControlName="location" matInput placeholder="eg. Hyderabad" />
+              </mat-form-field>
+            </div>
           </div>
         </div>
+        <div *ngIf="currentUserID !== '0' && currentUserID === formCreatorID">
+          <div  class="submit-btn-area">
+            <button class="btn" (click)="shareForm()">{{shareText}}</button>
+          </div>
+        </div>
+        
       </form>
     </div>
   </div>

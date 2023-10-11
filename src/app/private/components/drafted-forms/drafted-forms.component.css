@@ -1,3 +1,4 @@
+@import url(../../../shared/styles/globalstyles.css);
 .container{
     background-color: #D9D9D9;
     color: #595260;
@@ -31,7 +32,9 @@ table{
     padding: 1rem;
     background-color: #EEEEEE;
   }
-
+  .filter-table-dropdown{
+    width: 30%;
+  }
 :host ::ng-deep .mat-mdc-text-field-wrapper{
     background-color: #EEEEEE;
 }
