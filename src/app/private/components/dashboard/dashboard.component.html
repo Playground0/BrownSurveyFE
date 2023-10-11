@@ -1,1 +1,83 @@
-<p>dashboard works!</p>
+<div class="container shadow">
+    <div *ngIf="dataLoaded" class="loader">
+        <div class="spinner">
+          <mat-spinner></mat-spinner>
+        </div>
+    </div>
+    <div *ngIf="!dataLoaded">
+        <div class="top-box">
+            <h1>Hey {{(userDetails$ | async)?.username}}!, this is your <span style="color: #c10000;">dashboard</span>.</h1>
+            <!-- <div class="w-50">
+                <mat-form-field appearance="outline">
+                    <mat-label>Start your form search</mat-label>
+                    <input type="text" matInput placeholder="Enter form name" />
+                </mat-form-field>
+            </div> -->
+            <div class="box-row" *ngIf="( formAnalytics$ | async) as formAnalytics">
+                <div class="small-box shadow">
+                    <h2>{{formAnalytics.formsCreated}}</h2>
+                    <button class="btn">Form Created</button>
+                </div>
+                <div class="small-box shadow">
+                    <h2>{{formAnalytics.responses}}</h2>
+                    <button class="btn">Responses</button>
+                </div>
+                <div class="small-box shadow">
+                    <h2>{{formAnalytics.activeForms}}</h2>
+                    <button class="btn">Active Forms</button>
+                </div>
+                <div class="small-box shadow">
+                    <h2>{{formAnalytics.currenPlan}}</h2>
+                    <button class="btn">Current Plan</button>
+                </div>
+            </div>
+    
+        </div>
+        <div class="bottom-box">
+            <div class="filter-table-dropdown">
+                <mat-form-field appearance="outline">
+                    <mat-label>Filter Table</mat-label>
+                    <mat-select placeholder="Filter" (selectionChange)="filterTable($event.value)">
+                        <mat-option>Clear</mat-option>
+                        <mat-option [value]="typeForm" *ngFor="let typeForm of formDropDown" >{{typeForm}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="form-table" *ngIf="dataSource?.data">
+                <table mat-table [dataSource]="dataSource" class="shadow">
+                    <ng-container matColumnDef="{{column}}" *ngFor="let column of displayedColumns; let i =index">
+                        <th mat-header-cell *matHeaderCellDef> {{getLables(column)}} </th>
+                        <td mat-cell *matCellDef="let element">
+                            <span *ngIf="column !== 'share' && column !== 'delete' && column != 'status'">{{element[column]}}</span>
+                            <span *ngIf="column === 'status'">
+                                <button class="btn" (click)="openDialog(element.formname,element.Id,'Change Status',element[column]);" [disabled]="element[column] === 'Draft'">
+                                    <span *ngIf="element[column] === 'Public'"><mat-icon>public</mat-icon></span>
+                                    <span *ngIf="element[column] === 'Private'"><mat-icon>lock</mat-icon></span>
+                                    <span id="draft-icon" *ngIf="element[column] === 'Draft'"><mat-icon>drafts</mat-icon></span>
+                                </button>
+                                <!-- <button *ngIf="element[column] === 'Public'" class="btn"><mat-icon>public</mat-icon></button>
+                                <button *ngIf="element[column] === 'Private'" class="btn"><mat-icon>lock</mat-icon></button>
+                                <button *ngIf="element[column] === 'Draft'" class="btn"><mat-icon>drafts</mat-icon></button> -->
+                            </span>
+                            <span *ngIf="column === 'share' && element.status !== 'Draft' && element.status !== 'Private'" ><button class="btn" (click)="openDialog(element.formname,element.Id,'Share')"><mat-icon>share</mat-icon></button></span>
+                            <span *ngIf="column === 'delete'"><button
+                                    class="btn" (click)="openDialog(element.formname,element.Id,'Delete');"><mat-icon>delete_forever</mat-icon></button></span>
+                        </td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+                <div class="no-data shadow" *ngIf="!dataSource.data.length">
+                    <span>No Records</span>
+                </div>
+                <div class="shadow">
+                    <mat-paginator #paginator [length]="dataSource.data.length"  [pageSize]="5" [pageSizeOptions]="[5,10, 50, 100]">
+                    </mat-paginator>    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+</div>
+

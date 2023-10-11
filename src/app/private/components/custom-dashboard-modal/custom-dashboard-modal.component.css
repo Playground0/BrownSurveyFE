@@ -1,0 +1,15 @@
+.container {
+    padding: 1rem;
+}
+
+.btn {
+    background-color: #c10000;
+    color: #eeee;
+    margin: 1rem 0 1rem 1rem;
+    border: none;
+    float: right;
+}
+
+.content span {
+    display: block;
+}

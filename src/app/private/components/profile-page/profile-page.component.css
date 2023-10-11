@@ -1,0 +1,32 @@
+.container{
+    margin-bottom: 1%;
+}
+.sidenav{
+    background-color: #EEEEEE;
+    color: #595260;
+    text-align: center;
+    border-radius: 20px;
+    padding: 2%;
+    float: left;
+    width: 24%;
+    /* height: 45vh; */
+}
+.view{
+    float: right;
+    width: 74%;
+    /* align-items: center; */
+}
+.btn{
+    color: #595260;
+    border: none;
+    font-size: 28px;
+    padding: 5%;
+}
+.btn:hover {
+    color: #c10000;
+    border: none;
+  }
+.btn:focus {
+    border: none;
+    color: #c10000;
+  }

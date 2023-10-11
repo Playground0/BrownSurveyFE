@@ -45,7 +45,10 @@
     <span>Hi, {{loginText}}</span>
   </div>
   <button class="profile-btn"  mat-menu-item (click)="goToProfile('')">
-    <span> Profile <mat-icon class="account-icon profile-icons"> local_library</mat-icon></span>
+    <span> Dashboard <mat-icon class="account-icon profile-icons"> local_library</mat-icon></span>
+  </button>
+  <button class="profile-btn"  mat-menu-item (click)="goToProfile('profile-details')">
+    <span> Edit Info <mat-icon class="account-icon profile-icons"> edit</mat-icon></span>
   </button>
   <button class="profile-btn"  mat-menu-item (click)="goToProfile('Need Support')">
     <span>Support<mat-icon class="account-icon profile-icons">contact_support</mat-icon></span>

@@ -1,1 +1,73 @@
-<p>profile-details works!</p>
+<div class="container shadow" *ngIf="(userDetails$ | async) as userDetails">
+    <div class="top">
+        <div class="row">
+            <div class="col">
+                <div class="default-icon" *ngIf="!userDetails.profilepicture">
+                    <mat-icon>account_circle</mat-icon>
+                </div>
+                <div *ngIf="userDetails.profilepicture">
+                    
+                </div>
+                <div class="upload-image">
+                    <div class="btn shadow">Upload Image</div>
+                </div>
+            </div>
+            <div class="col user-fullname">
+                <div>
+                    <span>{{userDetails.fullname}}</span><br><p>{{userDetails.location}}</p>
+                </div>
+                <div></div>
+            </div>
+        </div>
+    </div>
+    <div class="bottom">
+        <form [formGroup]="userDetailsForm">
+            <div class="row">
+                <div class="col">
+                    <mat-form-field appearance="outline">
+                        <mat-label>User Name</mat-label>
+                        <input matInput type="text" formControlName="username" placeholder="Enter Your Username">
+                    </mat-form-field>
+                </div>
+                <div class="col">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Full Name</mat-label>
+                        <input matInput type="text" formControlName="fullname" placeholder="Enter Your Full name">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Email Address</mat-label>
+                        <input matInput type="email" formControlName="email" placeholder="Enter Your Username"
+                            email="true">
+                    </mat-form-field>
+                </div>
+                <div class="col">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Phone Number</mat-label>
+                        <input matInput type="text" formControlName="phonenumber" placeholder="Enter Your Phone Number">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Location</mat-label>
+                        <input matInput type="text" formControlName="location" placeholder="Enter Your Location">
+                    </mat-form-field>
+                </div>
+                <div class="col">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Age</mat-label>
+                        <input matInput type="text" formControlName="age" placeholder="Enter Your Age">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="save-button">
+                <div class="btn shadow" (click)="saveChanges()">Save Changes</div>
+            </div>
+        </form>
+    </div>
+</div>

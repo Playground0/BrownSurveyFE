@@ -1,2 +1,29 @@
-<p>profile-page works!</p>
-<router-outlet></router-outlet>
+
+<div class="container">
+    <!-- <div class="view"> -->
+        <div class="sidenav shadow">
+            <div>
+                <button class="btn" routerLink="dashboard">Dashboard</button>
+            </div>
+            <div>
+                <button class="btn"  routerLink="profile-details">User Info</button>
+            </div>
+            <div>
+                <button class="btn" routerLink="drafted-forms">Drafted Forms</button>
+            </div>
+            <div>
+                <button class="btn" routerLink="drafted-forms">Change Password</button>
+            </div>
+            <div>
+                <button class="btn" routerLink="/plans" (click)="goTo('subscribe')">Subscribe</button>
+            </div>
+            <div>
+                <button class="btn" routerLink="/about-us" (click)="goTo('about-us')">About Us</button>
+            </div>
+        </div>
+        <div class="view">
+            <router-outlet></router-outlet>
+        </div>
+
+        
+</div>

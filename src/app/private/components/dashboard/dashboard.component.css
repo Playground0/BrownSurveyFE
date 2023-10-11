@@ -1,0 +1,88 @@
+@import url(../../../shared/styles/globalstyles.css);
+
+.container{
+    background-color: #D9D9D9;
+    color: #595260;
+    padding: 5%;
+    border-radius: 20px;
+    margin-bottom: 2%;
+}
+.box-row{
+    display: flex;
+    justify-content: space-between;
+}
+.top-box h1{
+    font-weight: bold;
+    margin-bottom: 2%;
+}
+.small-box{
+    padding: 4%;
+    background-color: #EEEEEE;
+    color: #595260;
+    border-radius: 20px;
+    text-align: center;
+}
+.small-box h2{
+    font-size: 32px;
+}
+.small-box .btn{
+    color: #c10000;
+    border: none;
+}
+.small-box .btn:hover {
+    /* color: #c10000; */
+    border: none;
+    text-decoration: underline;
+  }
+.small-box .btn:focus {
+    border: none;
+    color: #c10000;
+  }
+  .bottom-box{
+    margin-top: 5%;
+  }
+  .filter-table-dropdown{
+    float: right;
+  }
+  .bottom-buttons{
+    margin-top: 2%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2%;
+  }
+  .form-table .btn{
+    color: #c10000;
+    border: none;
+  }
+  table{
+    color: #595260;
+    border-collapse: separate;
+    border-radius: 2rem;
+  }
+  table th{
+    border-bottom: 1px solid black;
+    font-weight: bold;
+    text-align: center;
+  }
+  table td{
+    text-align: center;
+  }
+  .mat-table
+  {
+    background-color:transparent!important;  
+  }
+  .no-data{
+    text-align: center;
+    padding: 1rem;
+    background-color: #EEEEEE;
+  }
+  #draft-icon{
+    color: black;
+  }
+
+:host ::ng-deep .mat-mdc-text-field-wrapper{
+    background-color: #EEEEEE;
+}
+:host ::ng-deep .mat-mdc-paginator-container{
+    border-top: 1px solid;
+}
