@@ -5,5 +5,10 @@ export interface LoginModel{
 export interface SignUpModel{
     email: string,
     username: string,
-    password: string
+    fullname: string,
+    phonenumber: string,
+    location: string,
+    age: string,
+    password: string,
+    userRole: number
 }

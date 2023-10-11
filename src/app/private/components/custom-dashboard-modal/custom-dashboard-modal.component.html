@@ -1,0 +1,8 @@
+<div class="container">
+    <h1><strong>{{modalTitle}}</strong></h1>
+    <div class="content">
+        <div [innerHTML]="modalMessage"></div>
+        <button class="btn shadow" (click)="goBack()">Go Back</button>
+        <button class="btn shadow" (click)="performOperation()">{{buttonText}}</button>
+    </div>
+</div>

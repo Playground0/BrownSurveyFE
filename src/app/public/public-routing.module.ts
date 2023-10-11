@@ -35,6 +35,10 @@ const routes: Routes = [
   {
     path: 'create/:formType',
     component: CreateFormComponent
+  },
+  {
+    path: 'create/:formType/draft-edit/:formId',
+    component: CreateFormComponent
   }
 ];
 

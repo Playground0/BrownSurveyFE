@@ -19,11 +19,14 @@
         </mat-form-field>
       </div>
       <div class="col-md-2 form-authenticity">
-        <div > 
+        <div *ngIf="!formId"> 
           <span *ngIf="(customForm.get('title')?.value.length < 5)">Authenticity</span>
           <span *ngIf="(customForm.get('title')?.value.length >= 5) && isTitleAuthenticating">Authenticating ...</span>
           <span class="bad-title" *ngIf="isTitleAuthenticationDone && isTitleAMatch">Not an Authentic Title</span>
           <span class="good-to-go-title" *ngIf="isTitleAuthenticationDone && !isTitleAMatch">Good To Go</span>
+        </div>
+        <div *ngIf="formId"> 
+          <span >Draft State</span>
         </div>
       </div>
     </div>
@@ -114,9 +117,15 @@
           <button  class="btn" [disabled]="forms.controls.length === formLimit" (click)="addForm()">+ Add</button>
         </div>
       </div>
+      <div *ngIf="userId === '0' && forms.controls.length === formLimit && formType !== 'Opinion'" class="login-to-add">
+        <span  routerLink="/login">Login to add more questions</span>
+      </div>
+      <div *ngIf="userId !== '0' && forms.controls.length === formLimit && formType !== 'Opinion'" class="login-to-add">
+        <span  routerLink="/plans">Suscribe to a better plan to add more question</span>
+      </div>
       <div>
         <button class="btn" (click)="reviewForm()">Review Form</button>
       </div>
     </div>
-  </form>
+   </form>
 </div>

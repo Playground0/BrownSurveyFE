@@ -57,6 +57,26 @@ export class LoginService {
     let localValue:any = sessionData ? JSON.parse(sessionData) : "";
     return localValue;
   }
+  getUserID(variableName:string) : any{
+    let sessionData = localStorage.getItem(variableName);
+    let localValue:any = sessionData ? JSON.parse(sessionData) : "";
+    return localValue ? localValue.Response.id : "0";
+  }
+  getUserName(variableName:string) : any{
+    let sessionData = localStorage.getItem(variableName);
+    let localValue:any = sessionData ? JSON.parse(sessionData) : "";
+    return localValue ? localValue.Response.username : "Annonymous";
+  }
+  getUserEmail(variableName:string) : any{
+    let sessionData = localStorage.getItem(variableName);
+    let localValue:any = sessionData ? JSON.parse(sessionData) : "";
+    return localValue ? localValue.Response.email : "Annonymous";
+  }
+  getUserRole(variableName:string) : any{
+    let sessionData = localStorage.getItem(variableName);
+    let localValue:any = sessionData ? JSON.parse(sessionData) : "";
+    return localValue ? localValue.Response.userRole : 0;
+  }
   removeLocalItem(variableName:string){
     localStorage.removeItem(variableName);
   }

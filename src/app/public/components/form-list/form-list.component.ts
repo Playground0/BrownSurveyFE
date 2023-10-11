@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { BasicFormDetails } from '../../models/UIModels/BasicFormDetails.model';
 import { Router } from '@angular/router';
-import { Observable, map } from 'rxjs';
+import { Observable, map, tap } from 'rxjs';
 
 @Component({
   selector: 'app-form-list',
@@ -11,15 +11,9 @@ import { Observable, map } from 'rxjs';
 export class FormListComponent implements OnInit  {
 
   @Input() list$! : Observable<BasicFormDetails[]>;
-  isFormLoaded: boolean = false;
+  @Input() listLength : number | null = null;
   constructor(private router: Router){}
   ngOnInit(): void {
-    this.list$.pipe(map((res : BasicFormDetails[]) => {
-      if(res.length){
-        this.isFormLoaded = true;
-      }
-      return res;
-    }))
   }
   navigateToForm(form:BasicFormDetails){
     this.router.navigateByUrl(`view-form/${form.Id}`);

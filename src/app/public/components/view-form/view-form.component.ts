@@ -1,5 +1,5 @@
 import { Component,OnInit,Inject,Input } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PublicApiService } from '../../services/public-api.service';
 import { Form } from '../../models/saveForm.model';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
@@ -7,6 +7,8 @@ import { FormQuestions } from '../../models/UIModels/CustomForm.model';
 import * as AdminConstants from '../../../shared/Constants/AdminConfiguration.constants';
 import { FormAnswerModel } from '../../models/SubmitForm';
 import { DatePipe } from '@angular/common';
+import { LoginService } from 'src/app/core/services/login.service';
+import { PublicCommonService } from '../../services/public-common.service';
 @Component({
   selector: 'app-view-form',
   templateUrl: './view-form.component.html',
@@ -24,17 +26,31 @@ export class ViewFormComponent implements OnInit {
   AdminConstants = AdminConstants;
   scaleBox : number[] = [1,2,3,4,5,6,7,8,9,10];
   selectedScaleValue: number = 0;
-  constructor(private activatedRoute:ActivatedRoute, private apiService : PublicApiService, private fb: FormBuilder, private datePipe: DatePipe) 
+  currentUserID: string | number = "0";
+  formCreatorID: string | number = "0";
+  shareText : string = "Share";
+  constructor(private activatedRoute:ActivatedRoute, private apiService : PublicApiService, private fb: FormBuilder,
+    private datePipe: DatePipe, private loginService: LoginService, private router: Router, private commonService: PublicCommonService) 
   {}
 
   ngOnInit(): void {
     this.getInfoFromUrl();
+  }
+  getUserInfo(){
+    this.currentUserID = this.loginService.getUserID("authData");
+    if(this.currentUserID){
+      let username = this.loginService.getUserName("authData");
+      let email = this.loginService.getUserEmail("authData");
+      this.responseForm.get('name')?.setValue( username !== "Annonymous" ? username : "");
+      this.responseForm.get('email')?.setValue(email !== "Annonymous" ? email : "");
+    }
   }
   getInfoFromUrl(){
     this.activatedRoute.params.subscribe((param) => {
       this.responseForm = this.initializeResponseForm();
       let id = param['id'];
       id ? this.getFormDetails(id) : this.loadData(this.dataFromDialog,true);
+      this.getUserInfo();
     });
   }
   initializeResponseForm() : FormGroup{
@@ -80,6 +96,7 @@ export class ViewFormComponent implements OnInit {
   }
   loadData(data: Form, isPreview: boolean){
       this.formDetails = data;
+      this.formCreatorID = data.userID ? data.userID : "0";
       this.questions = this.formDetails.formQuestions;
       this.setFormArray(this.questions); 
       this.formloader= false;
@@ -125,8 +142,8 @@ export class ViewFormComponent implements OnInit {
   setRequestBody(formValue:any) : FormAnswerModel{
     let currentDate: Date = new Date(Date.now());
     let returnValue : FormAnswerModel =  {
-      userID: "0",
-      userName: "0",
+      userID: this.currentUserID.toString(),
+      userName: this.loginService.getUserName("authData"),
       formId : this.formDetails?.Id ?  this.formDetails?.Id?.toString() : "",
       formTitle: this.formDetails?.formTitle ? this.formDetails?.formTitle : "",
       formCategory: this.formDetails?.formCategory ? this.formDetails?.formCategory : "",
@@ -161,5 +178,10 @@ export class ViewFormComponent implements OnInit {
     this.responseForm.get('age')?.updateValueAndValidity();
     this.responseForm.get('location')?.addValidators(Validators.required);
     this.responseForm.get('location')?.updateValueAndValidity();
+  }
+  shareForm(){
+    let url = this.commonService.getClientUrl() + this.router.url;
+    navigator.clipboard.writeText(url);
+    this.shareText = "Copied to Clipoard";
   }
 }

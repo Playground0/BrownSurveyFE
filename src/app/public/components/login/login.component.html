@@ -24,6 +24,22 @@
                     <mat-label>User Name</mat-label>
                     <input formControlName="username" type="text" matInput placeholder="Enter Email ID" />
                 </mat-form-field>
+                <mat-form-field appearance="outline" *ngIf="toggleLoginPage">
+                    <mat-label>Full Name</mat-label>
+                    <input formControlName="fullname" type="text" matInput placeholder="Enter Your Full Name" />
+                </mat-form-field>
+                <mat-form-field appearance="outline" *ngIf="toggleLoginPage">
+                    <mat-label>Phone Number</mat-label>
+                    <input formControlName="phonenumber" type="text" matInput placeholder="Enter Phone Number" />
+                </mat-form-field>
+                <mat-form-field appearance="outline" *ngIf="toggleLoginPage">
+                    <mat-label>Location</mat-label>
+                    <input formControlName="location" type="text" matInput placeholder="Enter location" />
+                </mat-form-field>
+                <mat-form-field appearance="outline" *ngIf="toggleLoginPage">
+                    <mat-label>Age</mat-label>
+                    <input formControlName="age" type="text" matInput placeholder="Enter your age" />
+                </mat-form-field>
                 <mat-form-field appearance="outline">
                     <mat-label>Password</mat-label>
                     <input formControlName="password" [type]="showPassword ? 'text' : 'password'"  matInput placeholder="Password" />

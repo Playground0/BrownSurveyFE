@@ -115,3 +115,11 @@
   border: none;
   color: #eeeeee;
 }
+.login-to-add{
+  cursor: pointer;
+  color: #c10000;
+  text-align: center;
+  margin-top: 1rem;
+  font-weight: bold;
+  font-size: 18px;
+}

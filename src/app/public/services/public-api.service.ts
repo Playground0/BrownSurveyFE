@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, interval, switchMap } from 'rxjs';
 import { TitleAuthentication } from '../models/AuthticationResponse.model';
 import { Form } from '../models/saveForm.model';
 import { BasicFormDetails } from '../models/UIModels/BasicFormDetails.model';
@@ -43,6 +43,12 @@ export class PublicApiService {
   }
   submitAnswer(form: FormAnswerModel): Observable<any>{
     return this.http.post<any>(`${this.apiUrl}/forms/submitAnswer`,form);
+  }
+  getUserRoles() : Observable<any>{
+    return this.http.get<any>(`${this.apiUrl}/users/get/Roles`);
+  }
+  updateFormDetails(id:string, formDetails: Form): Observable<any>{
+    return this.http.patch<any>(`${this.apiUrl}/forms/${id}`,formDetails);
   }
   
 }

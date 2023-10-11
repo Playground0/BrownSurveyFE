@@ -6,6 +6,7 @@ import { PublicApiService } from '../../services/public-api.service';
 import * as AdminConfigurationConstants from '../../../shared/Constants/AdminConfiguration.constants';
 import { Observable } from 'rxjs';
 import { AdminConfiguration } from '../../models/UIModels/AdminConfiguration';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-form-overview',
   templateUrl: './form-overview.component.html',
@@ -16,8 +17,8 @@ export class FormOverviewComponent implements OnInit{
   submitForm!: FormGroup;
   statusDropDown$!: Observable<AdminConfiguration[]>;
   submitLoader: boolean = false;
-  constructor(private fb: FormBuilder,@Inject(MAT_DIALOG_DATA) public data:{formData: Form}, private apiService: PublicApiService,
-  public dialogRef: MatDialogRef<FormOverviewComponent>){}
+  constructor(private fb: FormBuilder,@Inject(MAT_DIALOG_DATA) public data:{formData: Form, isDraft: boolean}, private apiService: PublicApiService,
+  public dialogRef: MatDialogRef<FormOverviewComponent>, private router:Router){}
 
   ngOnInit(): void {
     this.submitForm = this.initializeForm();
@@ -38,8 +39,13 @@ export class FormOverviewComponent implements OnInit{
     this.submitLoader = true;
     let formValue = this.submitForm.value;
     let submitForm: Form = this.data.formData;
+    let isDraft = this.data.isDraft;
     submitForm.formStatus = formValue.status;
     console.log(submitForm);
+    if(isDraft){
+      this.updateFormDetails(submitForm)
+      return;
+    }
     this.apiService.submitForm(submitForm).subscribe({
       next: (res:any) => {
         if(res){
@@ -52,6 +58,36 @@ export class FormOverviewComponent implements OnInit{
         console.log(err);
       }
      });
+  }
+  updateFormDetails(submitForm: Form){
+    if(submitForm.Id){
+      this.apiService.updateFormDetails(submitForm.Id,submitForm).subscribe({
+        next: (res) => {
+          if(res){
+            console.log(res);
+            this.submitLoader = false;
+            this.sendToRoute(submitForm.formStatus)
+          }
+        },
+        error: (err) => {
+          console.log(err);
+        }
+      });
+    }
+    return;
+  }
+  sendToRoute(status: string){
+    this.dialogRef.close({});
+    if(status === 'Public'){
+      this.router.navigateByUrl('/');
+      return;
+    }
+    if(status === 'Private'){
+      this.router.navigateByUrl('/profile');
+    }
+    if(status === 'Draft'){
+      this.router.navigateByUrl('/profile/drafted-forms');
+    }
   }
   getStatusValues(){
     this.statusDropDown$ = this.apiService.getAdminConfigurations(this.data.formData.formType,AdminConfigurationConstants.Status);

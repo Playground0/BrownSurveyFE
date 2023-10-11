@@ -4,6 +4,12 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class PrivateCommonService {
-
+  
+  localHost : boolean = false;
+  localHostUrl = this.localHost ? "localhost:4200" : "brownsurvey.vercel.app";
   constructor() { }
+
+  getClientUrl() : string{
+    return this.localHostUrl;
+  }
 }

@@ -21,9 +21,9 @@ export class HomePageComponent implements OnInit{
   trendingForm$!: Observable<BasicFormDetails>;
   contributorsList$!: Observable<ContributorList[]>;
   currContributor : number = 0;
-  surveyListLength : number = 0;
-  quizListLength : number = 0;
-  opinionListLength : number = 0;
+  surveyListLength : number | null = null;
+  quizListLength : number | null = null;
+  opinionListLength : number | null = null;
  
   constructor(private router:Router,private apiService: PublicApiService){}
   ngOnInit(): void {
@@ -34,10 +34,10 @@ export class HomePageComponent implements OnInit{
     this.router.navigateByUrl(`/create/${formType}`);
   }
   getAllForms(){
-    this.listOfSurvey$ = this.apiService.getAllFormByType(FormConstants.Survey).pipe(tap(forms => this.surveyListLength = forms.length));
-    this.listOfQuizzes$ = this.apiService.getAllFormByType(FormConstants.Quiz).pipe(tap(forms => this.quizListLength = forms.length));
-    this.listOfOpinions$ = this.apiService.getAllFormByType(FormConstants.Opinion).pipe(tap(forms => this.opinionListLength = forms.length));
-    this.trendingForm$ = this.apiService.getTrendingForm();
+      this.listOfSurvey$ = this.apiService.getAllFormByType(FormConstants.Survey).pipe(tap(forms => this.surveyListLength = forms.length));
+      this.listOfQuizzes$ = this.apiService.getAllFormByType(FormConstants.Quiz).pipe(tap(forms => this.quizListLength = forms.length));
+      this.listOfOpinions$ = this.apiService.getAllFormByType(FormConstants.Opinion).pipe(tap(forms => this.opinionListLength = forms.length));
+      this.trendingForm$ = this.apiService.getTrendingForm();
   }
   showTrending(form: BasicFormDetails){
     this.router.navigateByUrl(`view-form/${form.Id}`);
