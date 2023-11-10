@@ -26,8 +26,8 @@ export class PublicApiService {
   submitForm(form: Form) : Observable<Form>{
     return this.http.post<Form>(`${this.apiUrl}/forms/new`,form);
   }
-  checkTitleAuthenticity(title:string) : Observable<TitleAuthentication>{
-    return this.http.get<TitleAuthentication>(`${this.apiUrl}/forms/titleAuthentication/${title}`);
+  checkTitleAuthenticity(title:string,category:string,type:string) : Observable<TitleAuthentication>{
+    return this.http.get<TitleAuthentication>(`${this.apiUrl}/forms/titleAuthentication/${title}/${category}/${type}`);
   }
   getFormDetails(id:string) : Observable<Form>{
     return this.http.get<Form>(`${this.apiUrl}/forms/${id}`);
