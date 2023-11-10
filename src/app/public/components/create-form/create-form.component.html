@@ -6,7 +6,7 @@
         <mat-form-field class="form-category" appearance="outline" >
           <!-- <mat-label>Choose one</mat-label> -->
           <mat-label>Category</mat-label>
-          <mat-select placeholder="Category" formControlName="category">
+          <mat-select placeholder="Category" formControlName="category" (selectionChange)="onChangeTitle()" >
             <mat-option>Clear</mat-option> 
             <mat-option [value]="category.name" *ngFor="let category of listOfCategories$ | async">{{category.name}}</mat-option>
           </mat-select>
@@ -19,15 +19,15 @@
         </mat-form-field>
       </div>
       <div class="col-md-2 form-authenticity">
-        <div *ngIf="!formId"> 
+        <div> 
           <span *ngIf="(customForm.get('title')?.value.length < 5)">Authenticity</span>
           <span *ngIf="(customForm.get('title')?.value.length >= 5) && isTitleAuthenticating">Authenticating ...</span>
           <span class="bad-title" *ngIf="isTitleAuthenticationDone && isTitleAMatch">Not an Authentic Title</span>
           <span class="good-to-go-title" *ngIf="isTitleAuthenticationDone && !isTitleAMatch">Good To Go</span>
         </div>
-        <div *ngIf="formId"> 
+        <!-- <div *ngIf="formId"> 
           <span >Draft State</span>
-        </div>
+        </div> -->
       </div>
     </div>
   
