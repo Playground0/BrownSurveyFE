@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { LoginService } from 'src/app/core/services/login.service';
 import { DashBoardAnalytics, DashBoardTableData } from '../../models/DashboardData';
@@ -15,23 +15,28 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./dashboard.component.css']
 })
 
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, AfterViewInit {
+  
   @ViewChild('paginator') paginator!: MatPaginator;
   ELEMENT_DATA: DashBoardTableData[] = [];
   formDropDown: string[] = ["All", "Survey", "Quiz", "Opinion", "Private Forms", "Public Forms", "Draft Forms"];
-  dataSource!: MatTableDataSource<any>;
+  dataSource: MatTableDataSource<DashBoardTableData> = new MatTableDataSource(this.ELEMENT_DATA);
   displayedColumns: string[] = ['formname', 'type', 'participants', 'status', 'startDate', 'endDate', 'share', 'delete'];
   dataLoaded: boolean = false;
   userName: string = "";
   userId: string = "";
   userDetails$! : Observable<UserDetails>;
   formAnalytics$!: Observable<DashBoardAnalytics>;
+  currentFilterValue : string = "";
 
   constructor(private loginService: LoginService, private apiService: PrivateApiService,public dialog: MatDialog) { }
   ngOnInit(): void {
     this.getUserInfo();
     this.getFormAnalytics();
     this.getTableData();
+  }
+  ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator;
   }
   getFormAnalytics() {
     this.formAnalytics$ = this.apiService.getFormAnalytics(this.userId);
@@ -42,6 +47,7 @@ export class DashboardComponent implements OnInit {
         this.dataLoaded = true;
         this.ELEMENT_DATA = res;
         this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
+        this.currentFilterValue ? this.filterTable(this.currentFilterValue) : "";
         this.dataSource.paginator = this.paginator;
       }
     });
@@ -64,6 +70,7 @@ export class DashboardComponent implements OnInit {
     return '';
   }
   filterTable(value: string) {
+    this.currentFilterValue = value;
     if (value === 'Survey' || value === 'Quiz' || value === 'Opinion') {
       this.dataSource.data = this.ELEMENT_DATA.filter((ele: DashBoardTableData) => ele.type === value);
       return;
