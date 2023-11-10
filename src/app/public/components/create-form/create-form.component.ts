@@ -58,14 +58,20 @@ export class CreateFormComponent implements OnInit {
     });
   }
   onChangeTitle() {
-    let value: string = this.customForm.get('title')?.value;
+    let value: string = this.customForm.get('title')?.value.trim();
+    let category: string = this.customForm.get('category')?.value;
+    let type = this.formType;
+    if(!value || !type){
+      return;
+    }
+
     this.isTitleAuthenticationDone = false;
     if (value.length < 5) {
       return;
     }
     this.isTitleAuthenticating = true;
     setTimeout(() => {
-      this.publicApiService.checkTitleAuthenticity(value).subscribe({
+      this.publicApiService.checkTitleAuthenticity(value,category,type).subscribe({
         next: (res: TitleAuthentication) => {
           if (res.Status === 'SUCCED') {
             this.isTitleAuthenticating = false;
